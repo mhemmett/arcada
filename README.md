@@ -24,7 +24,7 @@ The RCA exists precisely to make this kind of integrative science possible. But 
 
 Given a plain-language query like:
 
-> *"Show me bottom pressure and seismic data near Axial Seamount for the two weeks following the 2024 eruption."*
+> *"Show me bottom pressure and seismic data near Axial Seamount for the two weeks following the 2015 eruption."*
 
 aRCADA will:
 
