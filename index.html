@@ -9,23 +9,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #020817;
-    --bg2: #06122a;
-    --bg3: #0a1a3a;
-    --surface: #0d2147;
-    --surface2: #123061;
-    --teal: #4ea1ff;
-    --teal-dim: #1d4ed8;
-    --teal-glow: rgba(78,161,255,0.14);
-    --teal-glow2: rgba(78,161,255,0.07);
-    --amber: #7dd3fc;
-    --amber-dim: rgba(125,211,252,0.16);
-    --text: #dbeafe;
-    --text2: #93c5fd;
-    --text3: #426b9f;
-    --border: rgba(78,161,255,0.18);
-    --border2: rgba(78,161,255,0.09);
-    --red: #E24B4A;
+    --bg: #f5f7fb;
+    --bg2: #edf1f8;
+    --bg3: #e4ebf5;
+    --surface: #ffffff;
+    --surface2: #f0f4fb;
+    --teal: #0055cc;
+    --teal-dim: #1a6ddd;
+    --teal-glow: rgba(0,85,204,0.10);
+    --teal-glow2: rgba(0,85,204,0.05);
+    --amber: #0077cc;
+    --amber-dim: rgba(0,119,204,0.16);
+    --text: #0a1a3a;
+    --text2: #2a4070;
+    --text3: #7090b8;
+    --border: rgba(0,85,204,0.22);
+    --border2: rgba(0,85,204,0.10);
+    --red: #cc2222;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,33 +40,6 @@
     cursor: default;
   }
 
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
-  /* ── SCAN LINES ── */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.03) 2px,
-      rgba(0,0,0,0.03) 4px
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-
   /* ── NAV ── */
   nav {
     position: fixed;
@@ -77,8 +50,9 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--border2);
-    background: rgba(2,8,23,0.88);
+    background: rgba(245,247,251,0.95);
     backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border2);
   }
 
   .nav-logo {
@@ -1139,13 +1113,14 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">aRCADA <span>/ v0.1-beta</span></div>
+  <div class="nav-logo"><span style="color:var(--teal)">a</span>RCADA <span>/ v0.1-beta</span></div>
   <ul class="nav-links">
     <li><a href="#problem">Problem</a></li>
     <li><a href="#approach">Approach</a></li>
     <li><a href="#demo">Demo</a></li>
     <li><a href="#future">Roadmap</a></li>
     <li><a href="#team">Team</a></li>
+    <li><a href="https://github.com/mhemmett/arcada" target="_blank" rel="noopener">GitHub</a></li>
     <li><a href="chat/index.html" style="color:var(--teal);font-weight:500;">Data Request →</a></li>
   </ul>
 </nav>
@@ -1417,114 +1392,48 @@
     <div class="section-label">Coverage</div>
     <h2 class="section-title">Cascadia Margin<br><span class="teal">instrument network</span></h2>
 
-    <div class="scope-split">
-      <div>
-        <p class="section-body" style="margin-bottom:1.5rem;">The RCA spans the Juan de Fuca tectonic plate, hosting instruments across methane seeps, hydrothermal vents, and an active submarine volcano — a complete biogeochemical system.</p>
+    <p class="section-body" style="margin-bottom:1.5rem;">The RCA spans the Juan de Fuca tectonic plate, hosting instruments across methane seeps, hydrothermal vents, and an active submarine volcano — a complete biogeochemical system.</p>
 
-        <div class="legend">
-          <div class="legend-item"><div class="inst-dot api" style="width:8px;height:8px;border-radius:50%;flex-shrink:0"></div> API-accessible</div>
-          <div class="legend-item"><div class="inst-dot html" style="width:8px;height:8px;border-radius:50%;flex-shrink:0"></div> HTML-stored (PI)</div>
-        </div>
+    <div class="legend">
+      <div class="legend-item"><div class="inst-dot api" style="width:8px;height:8px;border-radius:50%;flex-shrink:0"></div> API-accessible</div>
+      <div class="legend-item"><div class="inst-dot html" style="width:8px;height:8px;border-radius:50%;flex-shrink:0"></div> HTML-stored (PI)</div>
+    </div>
 
-        <div class="instrument-list">
-          <div class="instrument-item">
-            <div class="inst-dot api"></div>
-            <span class="inst-name">Ocean-Bottom Seismometers</span>
-            <span class="inst-tag api">API</span>
-          </div>
-          <div class="instrument-item">
-            <div class="inst-dot api"></div>
-            <span class="inst-name">Seafloor Pressure Gauges (BOTPT)</span>
-            <span class="inst-tag api">API</span>
-          </div>
-          <div class="instrument-item">
-            <div class="inst-dot api"></div>
-            <span class="inst-name">CTD Profilers & Fluorometers</span>
-            <span class="inst-tag api">API</span>
-          </div>
-          <div class="instrument-item">
-            <div class="inst-dot html"></div>
-            <span class="inst-name">Scanning Sonar (DIDSON/ADCP)</span>
-            <span class="inst-tag html">HTML</span>
-          </div>
-          <div class="instrument-item">
-            <div class="inst-dot html"></div>
-            <span class="inst-name">Seafloor Mass Spectrometers</span>
-            <span class="inst-tag html">HTML</span>
-          </div>
-          <div class="instrument-item">
-            <div class="inst-dot html"></div>
-            <span class="inst-name">ROPOS HD Video Cameras</span>
-            <span class="inst-tag html">HTML</span>
-          </div>
-          <div class="instrument-item">
-            <div class="inst-dot html"></div>
-            <span class="inst-name">Fluid & Gas Samplers (RASSP)</span>
-            <span class="inst-tag html">HTML</span>
-          </div>
-        </div>
+    <div class="instrument-list" style="max-width:600px;margin-top:1.5rem;">
+      <div class="instrument-item">
+        <div class="inst-dot api"></div>
+        <span class="inst-name">Ocean-Bottom Seismometers</span>
+        <span class="inst-tag api">API</span>
       </div>
-
-      <div class="scope-map">
-        <!-- Simplified Cascadia margin SVG map -->
-        <svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
-          <!-- Ocean background -->
-          <rect width="340" height="260" fill="#020817"/>
-
-          <!-- Coastline rough shape (Oregon/Washington coast) -->
-          <path d="M 260 0 L 265 30 L 255 50 L 260 80 L 250 110 L 255 140 L 248 170 L 252 200 L 246 230 L 250 260 L 340 260 L 340 0 Z"
-            fill="#0d2147" stroke="rgba(78,161,255,0.22)" stroke-width="0.5"/>
-
-          <!-- Land label -->
-          <text x="295" y="130" font-family="'DM Mono',monospace" font-size="9" fill="rgba(78,161,255,0.4)" letter-spacing="1">LAND</text>
-
-          <!-- Juan de Fuca Ridge (simplified) -->
-          <path d="M 30 20 L 35 60 L 28 100 L 32 140 L 25 180 L 30 220"
-            stroke="rgba(125,211,252,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
-          <text x="5" y="130" font-family="'DM Mono',monospace" font-size="6" fill="rgba(125,211,252,0.5)" letter-spacing="0.5">JdF RIDGE</text>
-
-          <!-- Cascadia Subduction Zone -->
-          <path d="M 200 0 L 205 40 L 198 80 L 202 120 L 195 160 L 200 200 L 195 240"
-            stroke="rgba(226,75,74,0.35)" stroke-width="1" fill="none" stroke-dasharray="6,3"/>
-
-          <!-- Grid lines (depth contours) -->
-          <line x1="0" y1="87" x2="340" y2="87" stroke="rgba(78,161,255,0.07)" stroke-width="0.5"/>
-          <line x1="0" y1="173" x2="340" y2="173" stroke="rgba(78,161,255,0.07)" stroke-width="0.5"/>
-          <line x1="85" y1="0" x2="85" y2="260" stroke="rgba(78,161,255,0.07)" stroke-width="0.5"/>
-          <line x1="170" y1="0" x2="170" y2="260" stroke="rgba(78,161,255,0.07)" stroke-width="0.5"/>
-
-          <!-- Axial Seamount -->
-          <circle cx="95" cy="105" r="10" fill="rgba(125,211,252,0.16)" stroke="rgba(125,211,252,0.6)" stroke-width="1"/>
-          <circle cx="95" cy="105" r="3" fill="rgba(125,211,252,0.85)"/>
-          <text x="110" y="102" font-family="'DM Mono',monospace" font-size="7" fill="#7dd3fc">Axial Seamount</text>
-          <text x="110" y="112" font-family="'DM Mono',monospace" font-size="6" fill="rgba(125,211,252,0.5)">~1520m · volcano</text>
-
-          <!-- Southern Hydrate Ridge -->
-          <circle cx="185" cy="155" r="6" fill="rgba(78,161,255,0.16)" stroke="rgba(78,161,255,0.7)" stroke-width="1"/>
-          <circle cx="185" cy="155" r="2.5" fill="var(--teal)"/>
-          <text x="197" y="152" font-family="'DM Mono',monospace" font-size="7" fill="#4ea1ff">Hydrate Ridge</text>
-          <text x="197" y="162" font-family="'DM Mono',monospace" font-size="6" fill="rgba(78,161,255,0.5)">~780m · CH₄ seeps</text>
-
-          <!-- Slope Base -->
-          <circle cx="215" cy="190" r="5" fill="rgba(78,161,255,0.12)" stroke="rgba(78,161,255,0.5)" stroke-width="1"/>
-          <circle cx="215" cy="190" r="2" fill="rgba(78,161,255,0.6)"/>
-          <text x="225" y="187" font-family="'DM Mono',monospace" font-size="7" fill="rgba(78,161,255,0.7)">Slope Base</text>
-          <text x="225" y="197" font-family="'DM Mono',monospace" font-size="6" fill="rgba(78,161,255,0.4)">~580m</text>
-
-          <!-- Axial Base (deep) -->
-          <circle cx="105" cy="135" r="4" fill="rgba(78,161,255,0.12)" stroke="rgba(78,161,255,0.4)" stroke-width="0.5"/>
-          <circle cx="105" cy="135" r="1.5" fill="rgba(78,161,255,0.5)"/>
-          <text x="115" y="139" font-family="'DM Mono',monospace" font-size="6" fill="rgba(78,161,255,0.4)">Axial Base ·1528m</text>
-
-          <!-- Cable lines -->
-          <path d="M 95 105 L 105 135 L 185 155 L 215 190" stroke="rgba(78,161,255,0.22)" stroke-width="0.5" fill="none" stroke-dasharray="3,3"/>
-
-          <!-- Oregon coast label -->
-          <text x="266" y="20" font-family="'Syne',sans-serif" font-size="8" fill="rgba(78,161,255,0.24)" letter-spacing="2">OREGON</text>
-
-          <!-- Depth indicator -->
-          <text x="8" y="248" font-family="'DM Mono',monospace" font-size="6" fill="rgba(78,161,255,0.24)">←— 130°W ———— 125°W —→</text>
-        </svg>
+      <div class="instrument-item">
+        <div class="inst-dot api"></div>
+        <span class="inst-name">Seafloor Pressure Gauges (BOTPT)</span>
+        <span class="inst-tag api">API</span>
+      </div>
+      <div class="instrument-item">
+        <div class="inst-dot api"></div>
+        <span class="inst-name">CTD Profilers & Fluorometers</span>
+        <span class="inst-tag api">API</span>
+      </div>
+      <div class="instrument-item">
+        <div class="inst-dot html"></div>
+        <span class="inst-name">Scanning Sonar (DIDSON/ADCP)</span>
+        <span class="inst-tag html">HTML</span>
+      </div>
+      <div class="instrument-item">
+        <div class="inst-dot html"></div>
+        <span class="inst-name">Seafloor Mass Spectrometers</span>
+        <span class="inst-tag html">HTML</span>
+      </div>
+      <div class="instrument-item">
+        <div class="inst-dot html"></div>
+        <span class="inst-name">ROPOS HD Video Cameras</span>
+        <span class="inst-tag html">HTML</span>
+      </div>
+      <div class="instrument-item">
+        <div class="inst-dot html"></div>
+        <span class="inst-name">Fluid & Gas Samplers (RASSP)</span>
+        <span class="inst-tag html">HTML</span>
       </div>
     </div>
   </div>
@@ -1537,7 +1446,7 @@
     <h2 class="section-title">Future <span class="teal">directions</span></h2>
     <p class="section-body" style="margin-bottom:0">Scoped initially to the OOI platform, designed from the start to expand.</p>
 
-    <div class="future-grid">
+    <div class="future-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 740px;">
       <div class="future-card">
         <div class="future-num">01</div>
         <div class="future-title">Literature Review RAG</div>
@@ -1546,33 +1455,9 @@
       </div>
       <div class="future-card">
         <div class="future-num">02</div>
-        <div class="future-title">Carbon Assessment Framework</div>
-        <div class="future-desc">Integration of an agentic lifecycle carbon footprint assessor to evaluate computational cost of each data retrieval workflow.</div>
-        <div class="future-phase">Phase 2</div>
-      </div>
-      <div class="future-card">
-        <div class="future-num">03</div>
-        <div class="future-title">Multi-Network Expansion</div>
-        <div class="future-desc">Extend the framework beyond OOI to complementary cabled observatories — Neptune Canada, DONET, and EMSO.</div>
-        <div class="future-phase">Phase 3</div>
-      </div>
-      <div class="future-card">
-        <div class="future-num">04</div>
         <div class="future-title">COSZO Integration</div>
         <div class="future-desc">Adapt aRCADA as the data assistant model for the forthcoming Cascadia Offshore Subduction Zone Observatory to advance earthquake and tsunami early warning for the Pacific Northwest.</div>
         <div class="future-phase">Long-term</div>
-      </div>
-      <div class="future-card">
-        <div class="future-num">05</div>
-        <div class="future-title">Automated Cross-Domain Alerts</div>
-        <div class="future-desc">Proactive notifications when multi-instrument signatures suggest anomalous biogeochemical events — vent eruptions, methane release pulses, or seismic swarms.</div>
-        <div class="future-phase">Phase 3</div>
-      </div>
-      <div class="future-card">
-        <div class="future-num">06</div>
-        <div class="future-title">Community Tool Ecosystem</div>
-        <div class="future-desc">Open-source plugin architecture allowing other research groups to contribute instrument-specific pull scripts, expanding coverage without central coordination.</div>
-        <div class="future-phase">Ongoing</div>
       </div>
     </div>
   </div>
@@ -1587,12 +1472,12 @@
     <div class="team-grid">
       <div class="team-card">
         <div class="team-name">Michael Hemmett</div>
-        <div class="team-role">Lead Researcher</div>
+        <div class="team-role">UW ESS Graduate Student</div>
         <div class="team-bio">Focused on agentic framework design, OOI API integration, and instrument data pipeline architecture for the Regional Cabled Array.</div>
       </div>
       <div class="team-card">
         <div class="team-name">Anjani Mirchandani</div>
-        <div class="team-role">Lead Researcher</div>
+        <div class="team-role">UW AMATH Undergraduate Student</div>
         <div class="team-bio">Focused on RAG system design, Gemini API integration, and cross-disciplinary data fusion strategies for marine observational networks.</div>
       </div>
     </div>
@@ -1615,6 +1500,7 @@
     <li><a href="https://ooinet.oceanobservatories.org" target="_blank">OOI Platform</a></li>
     <li><a href="#approach">Architecture</a></li>
     <li><a href="#team">Team</a></li>
+    <li><a href="https://github.com/mhemmett/arcada" target="_blank" rel="noopener">GitHub</a></li>
   </ul>
   <div class="footer-note">NSF Ocean Observatories Initiative · Regional Cabled Array · Oregon coast</div>
 </footer>

@@ -1,28 +1,28 @@
 /* aRCADA Chat UI — dark ocean theme drawing on OOI RCA visual identity */
 
 :root {
-  --bg:          #050d1a;
-  --bg-panel:    #0a1628;
-  --bg-card:     #0e1e35;
-  --bg-input:    #0c1a2e;
-  --border:      #1a3054;
-  --border-soft: #122540;
+  --bg:          #f5f7fb;
+  --bg-panel:    #edf1f8;
+  --bg-card:     #ffffff;
+  --bg-input:    #ffffff;
+  --border:      #c5d4e8;
+  --border-soft: #d8e4f0;
 
   /* OOI-inspired blues */
-  --accent:      #0066cc;
+  --accent:      #0055cc;
   --accent-dim:  #003da5;
-  --accent-glow: rgba(0, 102, 204, 0.18);
-  --teal:        #00b4d8;
-  --teal-dim:    rgba(0, 180, 216, 0.12);
+  --accent-glow: rgba(0, 85, 204, 0.08);
+  --teal:        #0077bb;
+  --teal-dim:    rgba(0, 119, 187, 0.10);
 
-  --text:        #dce8f8;
-  --text-muted:  #6a8db5;
-  --text-faint:  #3a5878;
+  --text:        #0a1a3a;
+  --text-muted:  #3a5878;
+  --text-faint:  #7090b8;
 
   --success:     #2e7d32;
-  --success-bg:  rgba(46, 125, 50, 0.12);
+  --success-bg:  rgba(46, 125, 50, 0.08);
   --error:       #c62828;
-  --error-bg:    rgba(198, 40, 40, 0.10);
+  --error-bg:    rgba(198, 40, 40, 0.06);
 
   --radius:      6px;
   --radius-lg:   12px;
@@ -52,7 +52,8 @@ body {
   padding: 0 2rem;
   height: 56px;
   border-bottom: 1px solid var(--border-soft);
-  background: rgba(5, 13, 26, 0.92);
+  background: rgba(245, 247, 251, 0.95);
+  box-shadow: 0 1px 0 var(--border-soft);
   backdrop-filter: blur(8px);
   position: sticky;
   top: 0;
@@ -158,9 +159,9 @@ body {
   border-radius: 3px;
   margin-top: 0.3rem;
 }
-.badge-ooi_api    { background: rgba(0, 102, 204, 0.2); color: #6ab4ff; }
-.badge-earthscope { background: rgba(0, 180, 216, 0.15); color: var(--teal); }
-.badge-pi_html    { background: rgba(255, 165, 0, 0.12); color: #ffb74d; }
+.badge-ooi_api    { background: rgba(0, 85, 204, 0.10); color: var(--accent); }
+.badge-earthscope { background: rgba(0, 119, 187, 0.10); color: var(--teal); }
+.badge-pi_html    { background: rgba(180, 100, 0, 0.10); color: #a05000; }
 
 /* ── Chat section ────────────────────────────────────────────────── */
 .chat-section {
@@ -218,7 +219,7 @@ body {
 }
 
 .message pre {
-  background: rgba(0,0,0,0.3);
+  background: var(--bg-panel);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius);
   padding: 0.75rem;
@@ -299,7 +300,7 @@ body {
 /* ── Modal ───────────────────────────────────────────────────────── */
 .modal-overlay {
   position: fixed; inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(10,26,58,0.5);
   display: flex; align-items: center; justify-content: center;
   z-index: 500;
   backdrop-filter: blur(4px);
