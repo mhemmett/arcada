@@ -77,6 +77,25 @@
 
 </main>
 
+<!-- Password gate -->
+<div class="modal-overlay" id="passwordOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="passwordTitle">
+    <h2 class="modal-title" id="passwordTitle">aRCADA Access</h2>
+    <div class="modal-body">Enter the access password to use the data request interface.</div>
+    <form id="passwordForm" style="margin-top:1rem;">
+      <div class="input-row" style="margin-bottom:0.5rem;">
+        <input type="password" id="passwordInput" class="query-input" style="min-height:unset;height:44px;resize:none;" placeholder="Password" autocomplete="current-password" required />
+        <button type="submit" class="submit-btn" aria-label="Unlock">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M3 10h14M11 4l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <p id="passwordError" style="font-size:0.75rem;color:var(--error);display:none;">Incorrect password.</p>
+    </form>
+  </div>
+</div>
+
 <!-- Download modal -->
 <div class="modal-overlay" id="modalOverlay" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
