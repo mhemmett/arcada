@@ -1,9 +1,9 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "description": "PI-operated instrument HTML page registry for aRCADA scraper",
   "base_urls": {
     "piweb_marum": "http://piweb.ooirsn.uw.edu/marum/data/",
-    "piweb_uw": "http://piweb.ooirsn.uw.edu/"
+    "piweb_root": "http://piweb.ooirsn.uw.edu/"
   },
   "instruments": [
     {
@@ -19,7 +19,7 @@
       "parse_strategy": "numeric_regex",
       "numeric_regex": "[-+]?\\d*\\.?\\d+(?:[eE][-+]?\\d+)?",
       "time_resolution": "per_burst",
-      "notes": "Data stored as burst files. Each directory is a measurement window. File size varies 1KB-50MB."
+      "notes": "Data stored as burst files. Each directory is a measurement window."
     },
     {
       "id": "PI-MASSP-ASHES",
@@ -48,6 +48,110 @@
       "parse_strategy": "fixed_width_or_csv",
       "time_resolution": "per_sample",
       "notes": "Discrete fluid samples from Hydrate Ridge and ASHES. Contains geochemistry data."
+    },
+    {
+      "id": "PI-CTDPFA110",
+      "instrument_code": "CTDPFA110",
+      "name": "ASHES PI CTD",
+      "base_url": "http://piweb.ooirsn.uw.edu/marum/data/CTDPFA110/",
+      "index_type": "apache_directory",
+      "directory_pattern": "{YYYY}/{MM}/",
+      "file_extension": ".dat",
+      "file_format": "text",
+      "parse_strategy": "seabird_ctd_dat",
+      "time_resolution": "per_file",
+      "notes": "Daily .dat files with SBE CTD data. Filename: CTDPFA110_IP_PORT_TIMESTAMP_UTC.dat"
+    },
+    {
+      "id": "PI-QNTSRA101",
+      "instrument_code": "QNTSRA101",
+      "name": "Hydrate Ridge Rotary Sonar",
+      "base_url": "http://piweb.ooirsn.uw.edu/marum/data/QNTSRA101/",
+      "index_type": "apache_directory",
+      "directory_pattern": "{YYYY}/{MM}/",
+      "file_extension": ".smb",
+      "file_format": "binary_sonar",
+      "parse_strategy": "binary_numeric_regex",
+      "time_resolution": "per_scan",
+      "notes": "Binary sonar scan files at 20-minute intervals. Require binary parser for .smb format."
+    },
+    {
+      "id": "PI-SCPRAA301",
+      "instrument_code": "SCPRAA301",
+      "name": "Oregon Slope Base SCPR Pressure",
+      "base_url": "http://piweb.ooirsn.uw.edu/scpr/data/",
+      "index_type": "apache_directory",
+      "directory_pattern": "SCPRAA301_PARO{N}/{YYYY}/{MM}/",
+      "file_extension": ".dat",
+      "file_format": "text",
+      "parse_strategy": "paroscientific_log",
+      "time_resolution": "per_file",
+      "notes": "Paroscientific Nano pressure sensor log: <log-ts:TIMESTAMP> *NNNN,period_us,temp_period,val. Two sensors PARO1 and PARO2. 1 Hz sampling."
+    },
+    {
+      "id": "PI-A0ABPA301",
+      "instrument_code": "A0ABPA301",
+      "name": "Axial Base Bottom Pressure Array",
+      "base_url": "http://piweb.ooirsn.uw.edu/a0a/data/A0ABPA301_data/",
+      "index_type": "apache_directory",
+      "directory_pattern": "{YYYY}/{MM}/",
+      "file_extension": ".dat",
+      "file_format": "csv",
+      "parse_strategy": "csv",
+      "time_resolution": "per_file",
+      "notes": "CSV .dat files: UTC_timestamp, instrument_time, temperature, plus multiple Paroscientific pressure period columns. ~4 Hz. Filename: A0ABPA301_data_IP_PORT_TIMESTAMP_UTC.dat"
+    },
+    {
+      "id": "PI-COVIS",
+      "instrument_code": "COVIS",
+      "name": "ASHES Vent Imaging Sonar (COVIS)",
+      "base_url": "http://piweb.ooirsn.uw.edu/covis/data/COVIS/",
+      "index_type": "apache_directory",
+      "directory_pattern": "",
+      "file_extension": ".tar.gz",
+      "file_format": "tar_archive",
+      "parse_strategy": "covis_matlab_mat",
+      "time_resolution": "per_survey",
+      "notes": "Reson 7125 multibeam sonar archives. Each .tar.gz contains MATLAB .mat files. Three survey types: IMAGING (plume 3D), DIFFUSE (seafloor backscatter), ENGINEERING. See COVIS/AAA-README.txt."
+    },
+    {
+      "id": "PI-DAS-OPTASENSE",
+      "instrument_code": "DAS-Optasense",
+      "name": "RCA DAS Optasense (2021+)",
+      "base_url": "http://piweb.ooirsn.uw.edu/das/data/Optasense/",
+      "index_type": "apache_directory",
+      "directory_pattern": "{NorthCable|SouthCable}/ReceiveFiber/{timestamp_dir}/",
+      "file_extension": ".hdf5",
+      "file_format": "hdf5",
+      "parse_strategy": "dascore_hdf5",
+      "time_resolution": "per_window",
+      "notes": "Optasense DAS interrogator on RCA north and south fiber cable segments. Each HDF5 file is a short time window. Read with DASCore or h5py."
+    },
+    {
+      "id": "PI-DAS24",
+      "instrument_code": "DAS24",
+      "name": "RCA DAS 2024 Deployment",
+      "base_url": "http://piweb.ooirsn.uw.edu/das24/data/",
+      "index_type": "apache_directory",
+      "directory_pattern": "{YYYYMMDD}/dphi/",
+      "file_extension": ".hdf5",
+      "file_format": "hdf5",
+      "parse_strategy": "dascore_hdf5",
+      "time_resolution": "per_file",
+      "notes": "DAS differential phase (dphi) data from 2024 deployment. 10-second HDF5 files named HHMMSS.hdf5 inside date directories."
+    },
+    {
+      "id": "PI-DAS25",
+      "instrument_code": "DAS25",
+      "name": "RCA DAS 2025 Deployment (ongoing)",
+      "base_url": "http://piweb.ooirsn.uw.edu/das25/data/",
+      "index_type": "apache_directory",
+      "directory_pattern": "{MultiDAS|OptoDAS}/{YYYY}/",
+      "file_extension": ".hdf5",
+      "file_format": "hdf5",
+      "parse_strategy": "dascore_hdf5",
+      "time_resolution": "per_file",
+      "notes": "Ongoing DAS deployment with MultiDAS and OptoDAS interrogators. Data available 2025-present."
     }
   ]
 }

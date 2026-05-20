@@ -19,8 +19,8 @@ from datetime import datetime, timezone
 
 import xarray as xr
 
-from earthscope import fetch_earthscope_instrument
-from ooi_api import fetch_ooi_instrument
+from earthscope import fetch_earthscope_instrument, check_data_availability as earthscope_availability
+from ooi_api import fetch_ooi_instrument, check_data_availability as ooi_availability, DataNotAvailableError
 from pi_scraper import fetch_pi_instrument
 from to_zarr import datasets_to_zarr
 
@@ -91,7 +91,16 @@ def run(plan: dict, out_dir: str) -> dict:
                 datasets[iid] = ds
             else:
                 log.warning("Empty dataset returned for %s", iid)
-                errors.append({"instrument_id": iid, "error": "Empty dataset"})
+                errors.append({"instrument_id": iid, "error": "Empty dataset — no records in requested window"})
+        except DataNotAvailableError as e:
+            log.warning("No data coverage for %s: %s", iid, e)
+            errors.append({
+                "instrument_id": iid,
+                "error": "no_coverage",
+                "message": str(e),
+                "coverage_start": e.avail.get("coverage_start"),
+                "coverage_end":   e.avail.get("coverage_end"),
+            })
         except Exception as e:
             log.error("Failed to fetch %s: %s", iid, e, exc_info=True)
             errors.append({"instrument_id": iid, "error": str(e)})

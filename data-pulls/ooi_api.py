@@ -1,13 +1,10 @@
 """
 OOI M2M API data pull for aRCADA.
-Handles all instruments served through the OOI REST API:
-  pressure (BOTPT), CTD, hydrophone, pCO2, thermistor, OBS.
+Handles all instruments served through the OOI REST API.
 """
 
-import os
-import re
-import time
 import logging
+import time
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -19,21 +16,52 @@ import xarray as xr
 log = logging.getLogger(__name__)
 
 OOI_BASE = "https://ooinet.oceanobservatories.org/api/m2m/12576/sensor/inv"
-NUM_RE   = re.compile(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?")
 
-# Stream definitions keyed by instrument type
+# stream name + delivery method for each instrument type.
+# method is "streamed" for cabled real-time; "recovered_inst" for deep profiler WFP.
 STREAM_MAP = {
-    "pressure":     "botpt_nano_sample",
-    "ctd":          "ctdpf_ckl_wfp_instrument",
-    "hydrophone":   "hydrophone_a_dcl_instrument",
-    "pco2":         "pco2w_a_dcl_instrument",
-    "thermistor":   "thsph_a_dcl_instrument",
-    "seismometer":  "obsbb_a_dcl_instrument",
+    "pressure":        ("botpt_nano_sample",           "streamed"),
+    "pressure_prest":  ("prest_real_time",             "streamed"),
+    "ctd":             ("ctdpf_optode_sample",         "streamed"),
+    "dissolved_oxygen":("do_stable_sample",            "streamed"),
+    "ph":              ("phsen_data_record",           "streamed"),
+    "fluorometer":     ("flort_d_data_record",         "streamed"),
+    "nitrate":         ("nutnr_a_sample",              "streamed"),
+    "adcp":            ("adcp_velocity_beam",          "streamed"),
+    "velocimeter":     ("vel3d_b_sample",              "streamed"),
+    "pco2":            ("pco2w_a_sami_data_record",    "streamed"),
+    "hpies":           ("horizontal_electric_field",   "streamed"),
+    "thermistor_array":("tmpsf_sample",                "streamed"),
+    "thermistor":      ("trhph_sample",                "streamed"),
+}
+
+# Instrument class suffix → type override (for classes needing non-default streams)
+CLASS_STREAM_OVERRIDES = {
+    "PRESTA": ("prest_real_time",             "streamed"),
+    "PRESTB": ("prest_real_time",             "streamed"),
+    "BOTPTA": ("botpt_nano_sample",           "streamed"),
+    "FLORDD": ("flord_d_data_record",         "streamed"),
+    "FLORTD": ("flort_d_data_record",         "streamed"),
+    "FLCDRA": ("flcd_r_dcl_instrument",       "recovered_inst"),
+    "FLNTUA": ("flntu_a_dcl_instrument",      "recovered_inst"),
+    "CTDPFL": ("ctdpf_optode_sample",         "recovered_inst"),
+    "VEL3DA": ("vel3d_b_sample",              "recovered_inst"),
+    "DOSTAD": ("do_stable_sample",            "streamed"),
+    "DOFSTA": ("do_stable_sample",            "streamed"),
+    "VADCPA": ("adcp_velocity_beam",          "streamed"),
+    "VADCPB": ("adcp_velocity_beam",          "streamed"),
+    "ADCPTD": ("adcp_velocity_beam",          "streamed"),
+    "ADCPTE": ("adcp_velocity_beam",          "streamed"),
+    "ADCPSK": ("adcp_velocity_beam",          "streamed"),
+    "VEL3DB": ("vel3d_b_sample",              "streamed"),
+    "VELPTD": ("velpt_velocity_data",         "streamed"),
+    "THSPHA": ("thsph_a_dcl_instrument",      "streamed"),
+    "TRHPHA": ("trhph_sample",                "streamed"),
+    "TMPSFA": ("tmpsf_sample",                "streamed"),
 }
 
 
 def _get(url: str, auth: tuple[str, str] | None, **kwargs) -> requests.Response:
-    """GET with retry and exponential backoff."""
     for attempt in range(4):
         try:
             r = requests.get(url, auth=auth, timeout=60, **kwargs)
@@ -42,61 +70,101 @@ def _get(url: str, auth: tuple[str, str] | None, **kwargs) -> requests.Response:
         except requests.RequestException as e:
             if attempt == 3:
                 raise
-            wait = 2 ** attempt
-            log.warning("Attempt %d failed (%s), retrying in %ds", attempt + 1, e, wait)
-            time.sleep(wait)
+            time.sleep(2 ** attempt)
 
 
-def request_async_delivery(
-    site: str,
-    node: str,
-    instrument: str,
-    stream: str,
+def _resolve_stream(instrument_cfg: dict) -> tuple[str, str]:
+    """Return (stream_name, method) for this instrument config."""
+    # Explicit stream in catalog entry takes priority
+    if instrument_cfg.get("stream"):
+        stream = instrument_cfg["stream"]
+        # Detect method from instrument node prefix (DP = recovered)
+        method = "recovered_inst" if instrument_cfg.get("node", "").startswith("DP") else "streamed"
+        return stream, method
+
+    # Check class-level override
+    instr_code = instrument_cfg.get("instrument", "")
+    cls = instr_code.split("-")[1][:6] if "-" in instr_code else ""
+    if cls in CLASS_STREAM_OVERRIDES:
+        return CLASS_STREAM_OVERRIDES[cls]
+
+    # Fall back to type map
+    itype = instrument_cfg["type"]
+    if itype in STREAM_MAP:
+        return STREAM_MAP[itype]
+
+    raise ValueError(f"No stream defined for instrument type '{itype}' / class '{cls}'")
+
+
+def check_data_availability(
+    instrument_cfg: dict,
     start: datetime,
     end: datetime,
-    username: str,
-    token: str,
+    auth: tuple[str, str] | None,
 ) -> dict:
     """
-    Submit an async data delivery request to the OOI M2M API.
-    Returns the response JSON containing the request status URL.
+    Check if data exists for the requested time range by querying the metadata endpoint.
+    Returns dict with: available (bool), coverage_start, coverage_end, record_count, note.
     """
-    url = f"{OOI_BASE}/{site}/{node}/{instrument}/{stream}"
-    params = {
-        "beginDT": start.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
-        "endDT":   end.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
-        "format":  "application/netcdf",
-        "limit":   -1,
-        "execDPA": True,
-    }
-    r = _get(url, auth=(username, token), params=params)
-    return r.json()
+    site   = instrument_cfg["site"]
+    node   = instrument_cfg["node"]
+    instr  = instrument_cfg["instrument"]
+
+    url = f"{OOI_BASE}/{site}/{node}/{instr}/metadata"
+    try:
+        r = requests.get(url, auth=auth, timeout=20)
+        r.raise_for_status()
+        meta = r.json()
+    except Exception as e:
+        return {"available": None, "note": f"Could not fetch metadata: {e}"}
+
+    try:
+        stream_name, _ = _resolve_stream(instrument_cfg)
+    except ValueError:
+        stream_name = None
+
+    # Find the best matching stream entry
+    times = meta.get("times", [])
+    good = [t for t in times if not t.get("method", "").startswith("bad_")]
+    if stream_name:
+        good = [t for t in good if t.get("stream") == stream_name] or good
+
+    if not good:
+        return {"available": False, "coverage_start": None, "coverage_end": None,
+                "record_count": 0, "note": "No data streams found in catalog"}
+
+    # Pick the stream with the most data
+    best = max(good, key=lambda t: t.get("count", 0))
+    cov_start = best.get("beginTime", "")
+    cov_end   = best.get("endTime", "")
+    count     = best.get("count", 0)
+
+    # Check overlap
+    req_start_s = start.isoformat()[:10]
+    req_end_s   = end.isoformat()[:10]
+    cov_start_s = cov_start[:10] if cov_start else ""
+    cov_end_s   = cov_end[:10] if cov_end else ""
+
+    if cov_end_s and req_start_s > cov_end_s:
+        note = f"Request ({req_start_s}–{req_end_s}) is after data coverage ({cov_start_s}–{cov_end_s})"
+        return {"available": False, "coverage_start": cov_start, "coverage_end": cov_end,
+                "record_count": count, "note": note}
+
+    if cov_start_s and req_end_s < cov_start_s:
+        note = f"Request ({req_start_s}–{req_end_s}) is before data coverage ({cov_start_s}–{cov_end_s})"
+        return {"available": False, "coverage_start": cov_start, "coverage_end": cov_end,
+                "record_count": count, "note": note}
+
+    return {"available": True, "coverage_start": cov_start, "coverage_end": cov_end,
+            "record_count": count, "note": f"Data available {cov_start_s}–{cov_end_s}"}
 
 
-def poll_async_request(status_url: str, username: str, token: str, timeout_s: int = 600) -> list[str]:
-    """
-    Poll an OOI async request until complete, return list of download URLs.
-    """
-    deadline = time.time() + timeout_s
-    while time.time() < deadline:
-        r = _get(status_url, auth=(username, token))
-        data = r.json()
-        if data.get("status") == "complete":
-            return data.get("allURLs", [])
-        if data.get("status") == "failed":
-            raise RuntimeError(f"OOI async request failed: {data}")
-        time.sleep(15)
-    raise TimeoutError(f"OOI async request did not complete within {timeout_s}s")
-
-
-def download_netcdf(url: str, out_path: str, username: str, token: str) -> str:
-    """Stream a NetCDF file from OOI thredds to disk."""
-    os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    with _get(url, auth=(username, token), stream=True) as r:
-        with open(out_path, "wb") as f:
-            for chunk in r.iter_content(chunk_size=65536):
-                f.write(chunk)
-    return out_path
+class DataNotAvailableError(Exception):
+    """Raised when data doesn't exist for the requested time range."""
+    def __init__(self, instrument_id: str, avail: dict):
+        self.instrument_id = instrument_id
+        self.avail = avail
+        super().__init__(avail.get("note", "No data available"))
 
 
 def fetch_ooi_instrument(
@@ -108,28 +176,26 @@ def fetch_ooi_instrument(
     ooi_token: str = "",
 ) -> xr.Dataset:
     """
-    High-level: fetch one OOI API instrument for a time range.
-    Returns an xarray Dataset. Writes intermediate NetCDF to out_dir.
-
-    For public instruments (no auth needed), pass empty strings.
-    For M2M auth, pass OOI username + API token.
+    Fetch one OOI API instrument for a time range.
+    Returns an xarray Dataset. Raises DataNotAvailableError if no coverage.
     """
-    site       = instrument_cfg["site"]
-    node       = instrument_cfg["node"]
-    instrument = instrument_cfg["instrument"]
-    itype      = instrument_cfg["type"]
-    stream     = instrument_cfg.get("stream") or STREAM_MAP.get(itype, "")
-
-    if not stream:
-        raise ValueError(f"No stream defined for instrument type '{itype}'")
-
-    log.info("Requesting OOI data: %s/%s/%s stream=%s", site, node, instrument, stream)
+    site   = instrument_cfg["site"]
+    node   = instrument_cfg["node"]
+    instr  = instrument_cfg["instrument"]
+    iid    = instrument_cfg["id"]
 
     auth = (ooi_username, ooi_token) if ooi_username else None
 
-    # Direct synchronous endpoint (works for small requests)
+    # Check availability first
+    avail = check_data_availability(instrument_cfg, start, end, auth)
+    if avail["available"] is False:
+        raise DataNotAvailableError(iid, avail)
+
+    stream, method = _resolve_stream(instrument_cfg)
+    log.info("Fetching %s / %s / %s  stream=%s", site, node, instr, stream)
+
     url = (
-        f"{OOI_BASE}/{site}/{node}/{instrument}/{stream}"
+        f"{OOI_BASE}/{site}/{node}/{instr}/{method}/{stream}"
         f"?beginDT={start.strftime('%Y-%m-%dT%H:%M:%S.000Z')}"
         f"&endDT={end.strftime('%Y-%m-%dT%H:%M:%S.000Z')}"
         f"&format=application/json&limit=20000"
@@ -139,51 +205,62 @@ def fetch_ooi_instrument(
     data = r.json()
 
     if not data:
-        log.warning("OOI returned empty dataset for %s", instrument_cfg["id"])
+        log.warning("OOI returned empty dataset for %s", iid)
         return xr.Dataset()
 
-    # Parse JSON response into xarray Dataset
+    if isinstance(data, dict) and "message" in data:
+        raise RuntimeError(f"OOI API error for {iid}: {data}")
+
     df = pd.DataFrame(data)
-    if "time" not in df.columns:
-        log.warning("No 'time' column in OOI response for %s", instrument_cfg["id"])
+
+    # Find time column
+    time_col = next((c for c in ["time", "port_timestamp", "preferred_timestamp"] if c in df.columns), None)
+    if time_col is None:
+        log.warning("No time column in OOI response for %s", iid)
         return xr.Dataset()
 
-    df["time"] = pd.to_datetime(df["time"], unit="s", utc=True)
+    df["time"] = pd.to_datetime(df[time_col], unit="s", utc=True)
     df = df.set_index("time").sort_index()
 
-    # Drop non-numeric columns (annotations, QC flags as strings)
-    numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-    df = df[numeric_cols]
+    # Keep only numeric science columns; drop QC flags and internal cols
+    drop_patterns = ["_qc_", "_qartod_", "driver_timestamp", "ingestion_timestamp",
+                     "preferred_timestamp", "port_timestamp", "sensor_id", "provenance"]
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    science_cols = [c for c in numeric_cols if not any(p in c for p in drop_patterns)]
+    df = df[science_cols]
+
+    if df.empty:
+        return xr.Dataset()
 
     ds = xr.Dataset.from_dataframe(df)
     ds.attrs.update({
-        "instrument_id":   instrument_cfg["id"],
+        "instrument_id":   iid,
         "instrument_name": instrument_cfg["name"],
         "site":            site,
         "node":            node,
-        "instrument":      instrument,
+        "instrument":      instr,
         "stream":          stream,
+        "method":          method,
         "latitude":        instrument_cfg.get("latitude"),
         "longitude":       instrument_cfg.get("longitude"),
         "depth_m":         instrument_cfg.get("depth_m"),
         "source":          "ooi_api",
+        "data_coverage_start": avail.get("coverage_start", ""),
+        "data_coverage_end":   avail.get("coverage_end", ""),
         "fetch_start":     start.isoformat(),
         "fetch_end":       end.isoformat(),
         "fetch_timestamp": datetime.now(timezone.utc).isoformat(),
     })
 
-    nc_path = os.path.join(out_dir, f"{instrument_cfg['id'].replace('/', '_')}.nc")
+    import os
+    nc_path = os.path.join(out_dir, f"{iid.replace('/', '_')}.nc")
     ds.to_netcdf(nc_path)
-    log.info("Saved NetCDF: %s", nc_path)
-
+    log.info("Saved NetCDF: %s (%d records)", nc_path, len(df))
     return ds
 
 
 def check_data_gaps(ds: xr.Dataset, expected_freq_s: Optional[float] = None) -> list[dict]:
-    """
-    Identify gaps in a time series Dataset.
-    Returns list of {start, end, duration_s} dicts.
-    """
+    """Identify gaps in a time series Dataset."""
     if "time" not in ds.dims or len(ds.time) < 2:
         return []
 
@@ -193,7 +270,7 @@ def check_data_gaps(ds: xr.Dataset, expected_freq_s: Optional[float] = None) -> 
     if expected_freq_s is None:
         expected_freq_s = float(np.median(diffs.total_seconds()))
 
-    threshold = expected_freq_s * 5  # gap = 5x nominal interval
+    threshold = expected_freq_s * 5
     gaps = []
     for i, d in enumerate(diffs):
         if d.total_seconds() > threshold:

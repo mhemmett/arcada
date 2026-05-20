@@ -1,10 +1,9 @@
 // aRCADA Cloudflare Worker
 // Routes: POST /embed, POST /chat, POST /plan, POST /dispatch, GET /status/:runId
 
-const GEMINI_EMBED_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent";
-// gemini-embedding-001 returns 3072-dim vectors
-const GEMINI_CHAT_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse";
-const GEMINI_JSON_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+const GEMINI_EMBED_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent";
+const GEMINI_CHAT_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:streamGenerateContent?alt=sse";
+const GEMINI_JSON_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent";
 const GITHUB_API       = "https://api.github.com";
 
 const SYSTEM_PROMPT = `You are aRCADA, an expert data assistant for the OOI Regional Cabled Array (RCA) and EarthScope seafloor observatory networks.
@@ -51,7 +50,7 @@ async function handleEmbed(req, env) {
     fetch(`${GEMINI_EMBED_URL}?key=${env.GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "models/gemini-embedding-001", content: { parts: [{ text }] } }),
+      body: JSON.stringify({ model: "models/gemini-embedding-2", content: { parts: [{ text }] }, outputDimensionality: 768 }),
     }).then(r => r.json()).then(r => r.embedding.values)
   );
 

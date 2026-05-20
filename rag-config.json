@@ -1,6 +1,6 @@
 {
-  "embedModel": "gemini-embedding-001",
-  "embedDim": 3072,
+  "embedModel": "text-embedding-004",
+  "embedDim": 768,
   "chunkWords": 300,
   "overlapWords": 60,
   "minChunkWords": 80,
