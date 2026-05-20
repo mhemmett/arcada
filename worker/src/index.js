@@ -3,8 +3,8 @@
 
 const GEMINI_EMBED_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent";
 // gemini-embedding-001 returns 3072-dim vectors
-const GEMINI_CHAT_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse";
-const GEMINI_JSON_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+const GEMINI_CHAT_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse";
+const GEMINI_JSON_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 const GITHUB_API       = "https://api.github.com";
 
 const SYSTEM_PROMPT = `You are aRCADA, an expert data assistant for the OOI Regional Cabled Array (RCA) and EarthScope seafloor observatory networks.
@@ -225,6 +225,7 @@ async function handleDispatch(req, env) {
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github+json",
         "Content-Type": "application/json",
+        "User-Agent": "arcada-data-assistant",
         "X-GitHub-Api-Version": "2022-11-28",
       },
       body: JSON.stringify({ ref: "main", inputs: { plan: JSON.stringify(plan) } }),
@@ -245,6 +246,7 @@ async function handleDispatch(req, env) {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github+json",
+        "User-Agent": "arcada-data-assistant",
         "X-GitHub-Api-Version": "2022-11-28",
       },
     }
@@ -264,6 +266,7 @@ async function handleStatus(runId, env) {
   const ghHeaders = {
     Authorization: `Bearer ${token}`,
     Accept: "application/vnd.github+json",
+    "User-Agent": "arcada-data-assistant",
     "X-GitHub-Api-Version": "2022-11-28",
   };
 

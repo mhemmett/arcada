@@ -293,7 +293,7 @@ async function onSubmit(e) {
           const chunk = JSON.parse(raw);
           const text = chunk?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
           fullText += text;
-          contentEl.textContent = fullText;
+          contentEl.innerHTML = marked.parse(fullText);
         } catch { /* partial JSON — skip */ }
       }
     }
@@ -313,7 +313,7 @@ async function onSubmit(e) {
 
     if (plan?.instruments?.length) {
       const planEl = addMessage("assistant", "");
-      planEl.innerHTML = `<strong>Data plan:</strong><pre>${JSON.stringify(plan, null, 2)}</pre>`;
+      planEl.innerHTML = `<strong>Data plan:</strong><pre class="plan-json">${JSON.stringify(plan, null, 2)}</pre>`;
 
       // 4. Dispatch GitHub Actions job
       setStatus("Dispatching data pull job…");
