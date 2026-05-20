@@ -16,7 +16,15 @@ const ROOT  = path.resolve(__dir, "..");
 const CONFIG       = JSON.parse(fs.readFileSync(path.join(ROOT, "rag-config.json"), "utf8"));
 const CATALOG      = JSON.parse(fs.readFileSync(path.join(ROOT, "catalog", "instruments.json"), "utf8"));
 const PI_PAGES     = JSON.parse(fs.readFileSync(path.join(ROOT, "catalog", "pi-pages.json"), "utf8"));
+const PAPERS       = loadOptional(path.join(ROOT, "catalog", "papers.json"));
+const M2M_META     = loadOptional(path.join(ROOT, "catalog", "m2m-metadata.json"));
+const RCA_CONTEXT  = loadOptional(path.join(ROOT, "catalog", "rca-context.json"));
 const GEMINI_KEY   = process.env.GEMINI_API_KEY;
+
+function loadOptional(p) {
+  try { return JSON.parse(fs.readFileSync(p, "utf8")); }
+  catch { console.warn(`  (optional) ${path.basename(p)} not found — skipping`); return null; }
+}
 const EMBED_URL    = `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents?key=${GEMINI_KEY}`;
 const OUT_DIR      = path.join(ROOT, "public");
 
@@ -50,9 +58,19 @@ function instrumentToText(inst) {
 function makeChunks() {
   const chunks = [];
 
+  // ── Instrument chunks ──────────────────────────────────────────────────────
   for (const inst of [...CATALOG.instruments, ...PI_PAGES.instruments]) {
-    const text      = instrumentToText(inst);
+    const m2m    = M2M_META?.instruments?.[inst.id];
+    const params = m2m?.parameters ?? [];
+
+    // Augment instrument text with M2M parameter names
+    const paramLine = params.length
+      ? `Parameters measured: ${params.map(p => p.display_name || p.name).join(", ")}`
+      : null;
+
+    const text = [instrumentToText(inst), paramLine].filter(Boolean).join("\n");
     const embedText = `Instrument: ${inst.name}\n\n${text}`;
+
     chunks.push({
       id:       inst.id,
       title:    inst.name,
@@ -64,7 +82,7 @@ function makeChunks() {
       embedText,
     });
 
-    // Also chunk the description as standalone for fine-grained retrieval
+    // Description chunk
     if (inst.description && inst.description.length > 100) {
       chunks.push({
         id:       `${inst.id}::desc`,
@@ -75,6 +93,66 @@ function makeChunks() {
         keywords: inst.keywords || [],
         text:     inst.description,
         embedText: `${inst.name}: ${inst.description}`,
+      });
+    }
+
+    // M2M parameters chunk — what the instrument actually measures
+    if (params.length > 0) {
+      const paramText = params
+        .filter(p => p.name)
+        .map(p => `${p.display_name || p.name}${p.units ? ` (${p.units})` : ""}${p.description ? ": " + p.description : ""}`)
+        .join("\n");
+      chunks.push({
+        id:       `${inst.id}::params`,
+        title:    `${inst.name} — measured parameters`,
+        type:     inst.type,
+        source:   inst.source,
+        location: inst.location || null,
+        keywords: inst.keywords || [],
+        text:     `Parameters for ${inst.name}:\n${paramText}`,
+        embedText: `What does ${inst.name} measure?\n${paramText}`,
+      });
+    }
+  }
+
+  // ── RCA site context chunks ────────────────────────────────────────────────
+  if (RCA_CONTEXT) {
+    for (const page of RCA_CONTEXT.pages) {
+      if (!page.description) continue;
+      chunks.push({
+        id:       `rca::${page.id}`,
+        title:    page.title,
+        type:     "site-context",
+        source:   "rca-website",
+        location: page.location || null,
+        keywords: ["regional cabled array", "OOI", "RCA", page.location || ""].filter(Boolean),
+        text:     page.description,
+        embedText: `About the ${page.title}:\n${page.description}`,
+        linked_instruments: page.instruments || [],
+      });
+    }
+  }
+
+  // ── Zotero paper chunks ────────────────────────────────────────────────────
+  if (PAPERS) {
+    for (const paper of PAPERS.papers) {
+      if (!paper.abstract || paper.abstract.length < 80) continue;
+      const yearStr = paper.year ? ` (${paper.year})` : "";
+      const journalStr = paper.journal ? ` — ${paper.journal}` : "";
+      const linkStr = paper.linked_instruments?.length
+        ? `\nRelevant instruments: ${paper.linked_instruments.join(", ")}`
+        : "";
+      const text = `${paper.title}${yearStr}${journalStr}\n\n${paper.abstract}${linkStr}`;
+      chunks.push({
+        id:       `paper::${paper.doi || paper.title.slice(0, 40).replace(/\s+/g, "-")}`,
+        title:    paper.title,
+        type:     "paper",
+        source:   "zotero",
+        location: null,
+        keywords: paper.tags || [],
+        text,
+        embedText: `Research paper: ${paper.title}\n\n${paper.abstract}`,
+        linked_instruments: paper.linked_instruments || [],
       });
     }
   }
@@ -136,7 +214,10 @@ function buildSearchIndex(chunks) {
 async function main() {
   console.log("Building aRCADA RAG index...");
   const chunks = makeChunks();
-  console.log(`  ${chunks.length} chunks from ${CATALOG.instruments.length + PI_PAGES.instruments.length} instruments`);
+  const instrCount = CATALOG.instruments.length + PI_PAGES.instruments.length;
+  const paperCount = PAPERS?.papers?.length ?? 0;
+  const pageCount  = RCA_CONTEXT?.pages?.length ?? 0;
+  console.log(`  ${chunks.length} chunks from ${instrCount} instruments, ${paperCount} papers, ${pageCount} RCA pages`);
 
   // Embed in batches
   const batchSize = CONFIG.batchSize || 25;
