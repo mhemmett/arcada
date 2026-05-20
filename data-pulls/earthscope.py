@@ -19,19 +19,10 @@ log = logging.getLogger(__name__)
 FDSN_CLIENT = "IRIS"
 DEFAULT_NETWORK = "OO"
 
-# Channel priority order: prefer broadband, fall back to short-period
-CHANNEL_PRIORITY = ["BH*", "HH*", "EH*", "SH*"]
-
-# Known RCA seismic stations
-RCA_STATIONS = {
-    "AXCC1": {"lat": 45.9549, "lon": -130.0089, "depth_m": 1519, "location": "Axial Caldera Center"},
-    "AXEC1": {"lat": 45.9420, "lon": -130.0148, "depth_m": 1519, "location": "Axial East Caldera 1"},
-    "AXEC2": {"lat": 45.9399, "lon": -129.9739, "depth_m": 1519, "location": "Axial East Caldera 2"},
-    "AXEC3": {"lat": 45.9173, "lon": -129.9754, "depth_m": 1519, "location": "Axial East Caldera 3"},
-    "AXID1": {"lat": 45.9234, "lon": -130.0147, "depth_m": 1560, "location": "Axial Int'l District"},
-    **{f"HYS{str(i).zfill(2)}": {"lat": 44.5692, "lon": -125.1479, "depth_m": 775, "location": "Hydrate Ridge"}
-       for i in range(1, 15)},
-}
+# Seismic channel priority
+SEISMIC_CHANNEL_PRIORITY = ["BH*", "HH*", "EH*", "SH*"]
+# Hydrophone channel priority
+HYDROPHONE_CHANNELS = ["HDH", "LDH"]
 
 
 def _utc(dt: datetime) -> UTCDateTime:
@@ -179,6 +170,44 @@ def _filter_stream(st, apply_filter: bool, freq_hz: float):
     return st
 
 
+def check_data_availability(
+    instrument_cfg: dict,
+    start: datetime,
+    end: datetime,
+) -> dict:
+    """
+    Check FDSN for data coverage. Returns dict with available, coverage_start, coverage_end, note.
+    """
+    network = instrument_cfg.get("fdsn_network") or instrument_cfg.get("network", DEFAULT_NETWORK)
+    station = instrument_cfg.get("fdsn_station") or instrument_cfg.get("station", "")
+    itype   = instrument_cfg.get("type", "seismometer")
+
+    if not station:
+        return {"available": None, "note": "No FDSN station code in instrument config"}
+
+    channel = "HDH,LDH" if itype == "hydrophone" else "BH*,HH*,EH*,SH*"
+
+    try:
+        client = Client(FDSN_CLIENT)
+        inv = client.get_stations(
+            network=network, station=station, channel=channel,
+            starttime=_utc(start), endtime=_utc(end), level="channel",
+        )
+        channels_found = []
+        for net in inv:
+            for sta in net:
+                for cha in sta:
+                    end_date = str(cha.end_date) if cha.end_date else "present"
+                    channels_found.append(f"{cha.code} ({str(cha.start_date)[:10]}–{end_date[:10]})")
+        if channels_found:
+            return {"available": True, "note": f"Channels: {', '.join(channels_found[:4])}"}
+        return {"available": False, "note": f"No {channel} channels at {network}.{station} in requested window"}
+    except Exception as e:
+        if "No data" in str(e) or "NoData" in str(e):
+            return {"available": False, "note": f"No data for {network}.{station} in requested window"}
+        return {"available": None, "note": f"FDSN availability check error: {e}"}
+
+
 def fetch_earthscope_instrument(
     instrument_cfg: dict,
     start: datetime,
@@ -186,11 +215,28 @@ def fetch_earthscope_instrument(
     out_dir: str,
     **kwargs,
 ) -> xr.Dataset:
-    """Entry point called by dispatcher.py."""
-    ds = fetch_waveforms(instrument_cfg, start, end, **kwargs)
-    if ds:
-        import os
+    """Entry point called by dispatcher.py. Handles seismometers and hydrophones."""
+    import os
+
+    # Resolve station: OOI hydrophone instruments store fdsn_station instead of station
+    station = instrument_cfg.get("fdsn_station") or instrument_cfg.get("station", "")
+    if not station:
+        log.error("No FDSN station code for %s", instrument_cfg["id"])
+        return xr.Dataset()
+
+    # Build a normalized config the fetch functions can use
+    cfg = {**instrument_cfg, "station": station,
+           "network": instrument_cfg.get("fdsn_network") or instrument_cfg.get("network", DEFAULT_NETWORK)}
+
+    itype = instrument_cfg.get("type", "seismometer")
+
+    if itype == "hydrophone":
+        ds = fetch_waveforms(cfg, start, end, channel="HDH,LDH", apply_filter=False)
+    else:
+        ds = fetch_waveforms(cfg, start, end, **kwargs)
+
+    if ds and ds.data_vars:
         nc_path = os.path.join(out_dir, f"{instrument_cfg['id'].replace('/', '_')}.nc")
         ds.to_netcdf(nc_path)
         log.info("Saved NetCDF: %s", nc_path)
-    return ds
+    return ds or xr.Dataset()

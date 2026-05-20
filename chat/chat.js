@@ -154,7 +154,10 @@ async function workerPost(path, body) {
     headers,
     body: JSON.stringify(body),
   });
-  if (!r.ok) throw new Error(`Worker ${path} returned ${r.status}`);
+  if (!r.ok) {
+    const body = await r.json().catch(() => ({}));
+    throw new Error(`Worker ${path} returned ${r.status}: ${body.error ?? ""} ${JSON.stringify(body.detail ?? body.raw ?? "")}`);
+  }
   return r.json();
 }
 
@@ -290,7 +293,7 @@ async function onSubmit(e) {
           const chunk = JSON.parse(raw);
           const text = chunk?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
           fullText += text;
-          contentEl.textContent = fullText;
+          contentEl.innerHTML = marked.parse(fullText);
         } catch { /* partial JSON — skip */ }
       }
     }
@@ -304,11 +307,13 @@ async function onSubmit(e) {
       seenPlan.add(base);
       return true;
     });
-    const { plan } = await workerPost("/plan", { query, context: planContext, catalog: INSTRUMENT_CATALOG });
+    const planResp = await workerPost("/plan", { query, context: planContext, catalog: INSTRUMENT_CATALOG });
+    const { plan, debug } = planResp;
+    console.log("[plan debug]", debug);
 
     if (plan?.instruments?.length) {
       const planEl = addMessage("assistant", "");
-      planEl.innerHTML = `<strong>Data plan:</strong><pre>${JSON.stringify(plan, null, 2)}</pre>`;
+      planEl.innerHTML = `<strong>Data plan:</strong><pre class="plan-json">${JSON.stringify(plan, null, 2)}</pre>`;
 
       // 4. Dispatch GitHub Actions job
       setStatus("Dispatching data pull job…");

@@ -25,7 +25,7 @@ function loadOptional(p) {
   try { return JSON.parse(fs.readFileSync(p, "utf8")); }
   catch { console.warn(`  (optional) ${path.basename(p)} not found — skipping`); return null; }
 }
-const EMBED_URL    = `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents?key=${GEMINI_KEY}`;
+const EMBED_URL    = `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:batchEmbedContents?key=${GEMINI_KEY}`;
 const OUT_DIR      = path.join(ROOT, "public");
 
 if (!GEMINI_KEY) { console.error("GEMINI_API_KEY not set"); process.exit(1); }
@@ -162,11 +162,12 @@ function makeChunks() {
 
 // ── Embed ─────────────────────────────────────────────────────────────────────
 
-async function embedBatch(texts, retries = 4) {
+async function embedBatch(texts, retries = 6) {
   const requests = texts.map(t => ({
-    model: "models/gemini-embedding-001",
+    model: "models/gemini-embedding-2",
     content: { parts: [{ text: t }] },
     taskType: "RETRIEVAL_DOCUMENT",
+    outputDimensionality: 768,
   }));
 
   for (let attempt = 0; attempt < retries; attempt++) {
@@ -180,8 +181,12 @@ async function embedBatch(texts, retries = 4) {
       return data.embeddings.map(e => e.values);
     }
     const errText = await res.text();
+    const delay = res.status === 429 ? 30000 * (attempt + 1) : 2000 * (attempt + 1);
     console.warn(`Embed attempt ${attempt + 1} failed (${res.status}): ${errText.slice(0, 120)}`);
-    await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+    if (attempt < retries - 1) {
+      console.warn(`  Waiting ${delay / 1000}s before retry...`);
+      await new Promise(r => setTimeout(r, delay));
+    }
   }
   throw new Error("Embedding failed after retries");
 }
@@ -228,7 +233,7 @@ async function main() {
     console.log(`  Embedding batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(chunks.length / batchSize)}...`);
     const vecs = await embedBatch(batch.map(c => c.embedText));
     for (const v of vecs) allVecs.push(l2Normalize(v));
-    await new Promise(r => setTimeout(r, 200)); // stay under rate limit
+    await new Promise(r => setTimeout(r, 15000)); // ~4 RPM to stay under rate limit
   }
 
   // Write embeddings.bin (Float32, row-major)
