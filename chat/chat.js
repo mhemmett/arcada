@@ -154,7 +154,10 @@ async function workerPost(path, body) {
     headers,
     body: JSON.stringify(body),
   });
-  if (!r.ok) throw new Error(`Worker ${path} returned ${r.status}`);
+  if (!r.ok) {
+    const body = await r.json().catch(() => ({}));
+    throw new Error(`Worker ${path} returned ${r.status}: ${body.error ?? ""} ${JSON.stringify(body.detail ?? body.raw ?? "")}`);
+  }
   return r.json();
 }
 
@@ -304,7 +307,9 @@ async function onSubmit(e) {
       seenPlan.add(base);
       return true;
     });
-    const { plan } = await workerPost("/plan", { query, context: planContext, catalog: INSTRUMENT_CATALOG });
+    const planResp = await workerPost("/plan", { query, context: planContext, catalog: INSTRUMENT_CATALOG });
+    const { plan, debug } = planResp;
+    console.log("[plan debug]", debug);
 
     if (plan?.instruments?.length) {
       const planEl = addMessage("assistant", "");

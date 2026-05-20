@@ -45,7 +45,7 @@ async function retry(fn, attempts = 3, delayMs = 800) {
 // ── /embed ────────────────────────────────────────────────────────────────────
 async function handleEmbed(req, env) {
   const { text } = await req.json();
-  if (!text) return new Response("Missing text", { status: 400 });
+  if (!text) return new Response("Missing text", { status: 400, headers: cors(env) });
 
   const vec = await retry(() =>
     fetch(`${GEMINI_EMBED_URL}?key=${env.GEMINI_API_KEY}`, {
@@ -61,7 +61,7 @@ async function handleEmbed(req, env) {
 // ── /chat ─────────────────────────────────────────────────────────────────────
 async function handleChat(req, env) {
   const { query, context } = await req.json();
-  if (!query) return new Response("Missing query", { status: 400 });
+  if (!query) return new Response("Missing query", { status: 400, headers: cors(env) });
 
   const contextBlock = context?.length
     ? `\n\nRelevant context from the instrument catalog and research literature:\n${
@@ -92,7 +92,7 @@ async function handleChat(req, env) {
 // Converts a plain-language query + instrument context into a structured data plan
 async function handlePlan(req, env) {
   const { query, context, catalog } = await req.json();
-  if (!query) return new Response("Missing query", { status: 400 });
+  if (!query) return new Response("Missing query", { status: 400, headers: cors(env) });
 
   // Separate instrument chunks from reference material (papers, site context)
   const REFERENCE_TYPES = new Set(["paper", "site-context"]);
@@ -170,12 +170,21 @@ Return ONLY valid JSON with this exact structure:
     }).then(r => r.json())
   );
 
-  const raw = result?.candidates?.[0]?.content?.parts?.[0]?.text ?? "{}";
+  // Detect Gemini API-level errors (quota, bad key, safety, etc.)
+  if (result?.error) {
+    return new Response(JSON.stringify({ error: "Gemini API error", detail: result.error }), { status: 502, headers: cors(env) });
+  }
+  if (!result?.candidates?.length) {
+    return new Response(JSON.stringify({ error: "Gemini returned no candidates", raw: result }), { status: 502, headers: cors(env) });
+  }
+
+  const raw = result.candidates[0]?.content?.parts?.[0]?.text ?? "{}";
   let plan;
   try { plan = JSON.parse(raw); }
-  catch { return new Response(JSON.stringify({ error: "Failed to parse plan", raw }), { status: 500 }); }
+  catch { return new Response(JSON.stringify({ error: "Failed to parse plan", raw }), { status: 500, headers: cors(env) }); }
 
   // Validate and fix instrument IDs against the catalog
+  const geminiInstruments = plan.instruments ?? [];
   if (plan.instruments) {
     plan.instruments = plan.instruments
       .map(inst => {
@@ -188,14 +197,21 @@ Return ONLY valid JSON with this exact structure:
       .filter(Boolean);
   }
 
-  return Response.json({ plan }, { headers: cors(env) });
+  // Include debug info so the UI can surface validation failures
+  const debug = {
+    geminiInstrumentIds: geminiInstruments.map(i => i.id),
+    validatedInstrumentIds: (plan.instruments || []).map(i => i.id),
+    catalogIds: [...validInstruments.keys()],
+  };
+
+  return Response.json({ plan, debug }, { headers: cors(env) });
 }
 
 // ── /dispatch ─────────────────────────────────────────────────────────────────
 // Triggers a GitHub Actions workflow to run the Python data pull
 async function handleDispatch(req, env) {
   const { plan } = await req.json();
-  if (!plan) return new Response("Missing plan", { status: 400 });
+  if (!plan) return new Response("Missing plan", { status: 400, headers: cors(env) });
 
   const owner = env.GITHUB_REPO_OWNER;
   const repo  = env.GITHUB_REPO_NAME;
@@ -217,7 +233,7 @@ async function handleDispatch(req, env) {
 
   if (!dispatchRes.ok) {
     const err = await dispatchRes.text();
-    return new Response(JSON.stringify({ error: "GitHub dispatch failed", detail: err }), { status: 502 });
+    return new Response(JSON.stringify({ error: "GitHub dispatch failed", detail: err }), { status: 502, headers: cors(env) });
   }
 
   // GitHub Actions takes a moment to register the run — wait briefly then find its ID

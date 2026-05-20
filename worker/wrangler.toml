@@ -3,7 +3,7 @@ main = "src/index.js"
 compatibility_date = "2025-04-01"
 
 [vars]
-ALLOWED_ORIGIN = "https://mhemmett.github.io"
+ALLOWED_ORIGIN = "*"
 
 # Secrets (set via: wrangler secret put <NAME>)
 # GEMINI_API_KEY

@@ -36,7 +36,7 @@ async function boot() {
     if (seenIds.has(baseId)) return false;
     seenIds.add(baseId);
     return true;
-  });
+  }).map(c => ({ ...c, id: c.id.replace(/::.*$/, "") })); // normalize to base ID
 
   miniSearch = new MiniSearch({
     idField: "miniSearchId",
