@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+"""
+Exports papers from the OOI-RCA Zotero collection to catalog/papers.json.
+Reads a copy of ~/Zotero/zotero.sqlite to avoid lock contention with the app.
+
+Run: python3 scripts/fetch-zotero.py
+"""
+
+import json
+import re
+import shutil
+import sqlite3
+import tempfile
+from pathlib import Path
+
+ZOTERO_DB = Path.home() / "Zotero" / "zotero.sqlite"
+OUT = Path(__file__).parent.parent / "catalog" / "papers.json"
+
+TARGET_COLLECTIONS = {"OOI RCA", "OOI-RCA"}
+
+# Keyword/phrase → instrument IDs for automatic paper→instrument linking.
+# Order matters: more specific phrases first.
+KEYWORD_MAP = [
+    ("ashes",           ["RS03ASHS-MJ03B-15-OBSSPA301", "RS03ASHS-MJ03B-10-THSPHD000", "PI-MASSP-ASHES"]),
+    ("mass spectrometer", ["PI-MASSP-ASHES"]),
+    ("massp",           ["PI-MASSP-ASHES"]),
+    ("scanning sonar",  ["PI-OVRSRA101"]),
+    ("sonar",           ["PI-OVRSRA101"]),
+    ("axial seamount",  ["EARTHSCOPE-OO-AXCC1", "EARTHSCOPE-OO-AXEC2", "EARTHSCOPE-OO-AXID1",
+                          "RS03AXBS-LJ03A-12-HYDLFA301", "RS03AXBS-LJ03A-14-BOTPTA301",
+                          "RS03AXPS-PC03A-4B-CTDPFK301", "RS03ASHS-MJ03B-15-OBSSPA301"]),
+    ("juan de fuca",    ["EARTHSCOPE-OO-AXCC1", "EARTHSCOPE-OO-AXEC2", "EARTHSCOPE-OO-AXID1"]),
+    ("hydrate ridge",   ["RS01SUM2-MJ01B-12-HYDMGA000", "RS01SUM2-MJ01B-14-BOTPTA301",
+                          "RS01SUM2-MJ01B-15-OBSBBA102", "EARTHSCOPE-OO-HYS14", "PI-OVRSRA101"]),
+    ("methane",         ["RS01SUM2-MJ01B-12-HYDMGA000", "PI-MASSP-ASHES"]),
+    ("pco2",            ["RS01SUM1-LJ01B-10-PCO2WA101"]),
+    ("carbon dioxide",  ["RS01SUM1-LJ01B-10-PCO2WA101", "PI-MASSP-ASHES"]),
+    ("hydrophone",      ["RS01SUM2-MJ01B-12-HYDMGA000", "RS03AXBS-LJ03A-12-HYDLFA301"]),
+    ("acoustic",        ["RS01SUM2-MJ01B-12-HYDMGA000", "RS03AXBS-LJ03A-12-HYDLFA301"]),
+    ("das",             ["RS01SUM2-MJ01B-12-HYDMGA000", "RS03AXBS-LJ03A-12-HYDLFA301"]),
+    ("distributed acoustic", ["RS01SUM2-MJ01B-12-HYDMGA000", "RS03AXBS-LJ03A-12-HYDLFA301"]),
+    ("fin whale",       ["RS01SUM2-MJ01B-12-HYDMGA000", "RS03AXBS-LJ03A-12-HYDLFA301"]),
+    ("seismometer",     ["RS01SUM2-MJ01B-15-OBSBBA102", "EARTHSCOPE-OO-AXCC1",
+                          "EARTHSCOPE-OO-AXEC2", "EARTHSCOPE-OO-AXID1", "EARTHSCOPE-OO-HYS14"]),
+    ("earthquake",      ["RS01SUM2-MJ01B-15-OBSBBA102", "EARTHSCOPE-OO-AXCC1",
+                          "EARTHSCOPE-OO-AXEC2", "EARTHSCOPE-OO-AXID1", "EARTHSCOPE-OO-HYS14"]),
+    ("seismic",         ["RS01SUM2-MJ01B-15-OBSBBA102", "EARTHSCOPE-OO-AXCC1",
+                          "EARTHSCOPE-OO-AXEC2", "EARTHSCOPE-OO-AXID1", "EARTHSCOPE-OO-HYS14"]),
+    ("tremor",          ["RS01SUM2-MJ01B-15-OBSBBA102", "EARTHSCOPE-OO-AXCC1"]),
+    ("eruption",        ["EARTHSCOPE-OO-AXCC1", "RS03AXBS-LJ03A-14-BOTPTA301",
+                          "RS03ASHS-MJ03B-15-OBSSPA301"]),
+    ("volcano",         ["EARTHSCOPE-OO-AXCC1", "EARTHSCOPE-OO-AXEC2", "EARTHSCOPE-OO-AXID1"]),
+    ("hydrothermal",    ["RS03ASHS-MJ03B-10-THSPHD000", "RS03ASHS-MJ03B-15-OBSSPA301",
+                          "PI-MASSP-ASHES"]),
+    ("pressure",        ["RS01SUM2-MJ01B-14-BOTPTA301", "RS03AXBS-LJ03A-14-BOTPTA301"]),
+    ("geodesy",         ["RS01SUM2-MJ01B-14-BOTPTA301", "RS03AXBS-LJ03A-14-BOTPTA301"]),
+    ("deformation",     ["RS01SUM2-MJ01B-14-BOTPTA301", "RS03AXBS-LJ03A-14-BOTPTA301"]),
+    ("ctd",             ["RS03AXPS-PC03A-4B-CTDPFK301"]),
+    ("thermistor",      ["RS01SUM2-MJ01B-09-THSPHD000", "RS03ASHS-MJ03B-10-THSPHD000"]),
+    ("temperature",     ["RS01SUM2-MJ01B-09-THSPHD000", "RS03ASHS-MJ03B-10-THSPHD000"]),
+]
+
+
+def link_instruments(title: str, abstract: str, tags: list) -> list:
+    text = (title + " " + abstract + " " + " ".join(tags)).lower()
+    linked = set()
+    for kw, ids in KEYWORD_MAP:
+        if kw in text:
+            linked.update(ids)
+    return sorted(linked)
+
+
+def main():
+    with tempfile.NamedTemporaryFile(suffix=".sqlite", delete=False) as tmp:
+        shutil.copy2(ZOTERO_DB, tmp.name)
+        db_path = tmp.name
+
+    con = sqlite3.connect(db_path)
+    con.row_factory = sqlite3.Row
+
+    placeholders = ",".join("?" * len(TARGET_COLLECTIONS))
+    collection_ids = [
+        row["collectionID"]
+        for row in con.execute(
+            f"SELECT collectionID FROM collections WHERE collectionName IN ({placeholders})",
+            list(TARGET_COLLECTIONS),
+        )
+    ]
+    if not collection_ids:
+        raise RuntimeError(f"No collections matching {TARGET_COLLECTIONS}")
+    print(f"Found collection IDs: {collection_ids}")
+
+    ph = ",".join("?" * len(collection_ids))
+    item_ids = [
+        row["itemID"]
+        for row in con.execute(
+            f"SELECT DISTINCT itemID FROM collectionItems WHERE collectionID IN ({ph})",
+            collection_ids,
+        )
+    ]
+    print(f"Found {len(item_ids)} items")
+
+    ph = ",".join("?" * len(item_ids))
+    fields_by_item = {}
+    for row in con.execute(
+        f"""SELECT id.itemID, f.fieldName, idv.value
+            FROM itemData id
+            JOIN fields f ON id.fieldID = f.fieldID
+            JOIN itemDataValues idv ON id.valueID = idv.valueID
+            WHERE id.itemID IN ({ph})
+              AND f.fieldName IN ('title','abstractNote','DOI','date','url','publicationTitle')""",
+        item_ids,
+    ):
+        fields_by_item.setdefault(row["itemID"], {})[row["fieldName"]] = row["value"]
+
+    tags_by_item = {}
+    for row in con.execute(
+        f"""SELECT it.itemID, t.name
+            FROM itemTags it
+            JOIN tags t ON it.tagID = t.tagID
+            WHERE it.itemID IN ({ph})""",
+        item_ids,
+    ):
+        tags_by_item.setdefault(row["itemID"], []).append(row["name"])
+
+    con.close()
+
+    papers = []
+    for item_id in item_ids:
+        f = fields_by_item.get(item_id, {})
+        title = f.get("title", "").strip()
+        if not title:
+            continue
+        abstract = f.get("abstractNote", "").strip()
+        tags = tags_by_item.get(item_id, [])
+        year_match = re.search(r"\b(19|20)\d{2}\b", f.get("date", ""))
+        year = int(year_match.group()) if year_match else None
+        papers.append({
+            "title": title,
+            "abstract": abstract,
+            "doi": f.get("DOI", "").strip() or None,
+            "year": year,
+            "journal": f.get("publicationTitle", "").strip() or None,
+            "tags": tags,
+            "linked_instruments": link_instruments(title, abstract, tags),
+        })
+
+    papers.sort(key=lambda p: p["year"] or 0, reverse=True)
+    out = {"version": "1.0", "source": "Zotero OOI-RCA collection", "papers": papers}
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False))
+    print(f"Wrote {len(papers)} papers → {OUT}")
+
+
+if __name__ == "__main__":
+    main()
