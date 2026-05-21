@@ -282,28 +282,46 @@ function renderMarkdown(text) {
 
 function renderDataPlan(plan) {
   const sourceLabel = { ooi_api: "OOI API", earthscope: "EarthScope", pi_html: "PI Portal" };
-
-  const instruments = (plan.instruments || []).map(inst => `
-    <div class="plan-instrument${inst.priority === "primary" ? " plan-primary-instr" : ""}">
-      <div class="plan-instr-header">
-        <span class="plan-instr-name">${inst.name || inst.id}</span>
-        <span class="instrument-card-badge badge-${inst.source}">${sourceLabel[inst.source] || inst.source}</span>
-      </div>
-      ${inst.rationale ? `<div class="plan-rationale">${inst.rationale}</div>` : ""}
-    </div>`).join("");
+  const typeLabel   = {
+    seismometer: "Seismometer", pressure: "Pressure / BOTPT",
+    ctd: "CTD Profiler", hydrophone: "Hydrophone",
+    pco2: "pCO₂ Sensor", thermistor: "Thermistor",
+    sonar: "Scanning Sonar", mass_spectrometer: "Mass Spectrometer",
+  };
 
   const tr = plan.time_range;
-  const timeHtml = tr ? `
-    <div class="plan-time">
-      <span class="plan-time-dates">${tr.start?.slice(0, 10) ?? "?"} → ${tr.end?.slice(0, 10) ?? "?"}</span>
-      ${tr.notes ? `<span class="plan-time-notes">${tr.notes}</span>` : ""}
-    </div>` : "";
+  const period = tr
+    ? `${tr.start?.slice(0, 10) ?? "?"} → ${tr.end?.slice(0, 10) ?? "?"}`
+    : null;
+
+  const instruments = (plan.instruments || []).map(inst => {
+    const rows = [
+      ["Instrument", inst.name || inst.id],
+      ["ID",         inst.id],
+      period ? ["Period", period] : null,
+      ["Type",       typeLabel[inst.type] || inst.type],
+      ["Source",     sourceLabel[inst.source] || inst.source],
+      ["Priority",   inst.priority || "—"],
+    ].filter(Boolean).map(([k, v]) =>
+      `<div class="data-row"><span class="data-key">${k}</span><span class="data-val">${v}</span></div>`
+    ).join("");
+
+    return `
+      <div class="plan-instrument${inst.priority === "primary" ? " plan-primary-instr" : ""}">
+        <div class="plan-data-table">${rows}</div>
+        ${inst.rationale ? `<div class="plan-rationale">${inst.rationale}</div>` : ""}
+      </div>`;
+  }).join("");
+
+  const notesHtml = tr?.notes
+    ? `<div class="plan-time-notes" style="margin-bottom:0.75rem;">${tr.notes}</div>`
+    : "";
 
   return `
     <div class="data-plan-card">
       <div class="plan-card-label">Data Plan</div>
       ${plan.summary ? `<p class="plan-summary">${plan.summary}</p>` : ""}
-      ${timeHtml}
+      ${notesHtml}
       <div class="plan-instruments-list">${instruments}</div>
     </div>`;
 }

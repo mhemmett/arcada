@@ -608,11 +608,25 @@ a.paper-card:hover { border-color: var(--teal); background: var(--paper-hover); 
   color: var(--text);
   flex: 1;
 }
+.plan-data-table { display: flex; flex-direction: column; }
+.plan-data-table .data-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 0.75rem;
+}
+.plan-data-table .data-row:last-child { border-bottom: none; }
+.plan-data-table .data-key { color: var(--text-muted); min-width: 80px; }
+.plan-data-table .data-val { color: var(--teal); }
 .plan-rationale {
   font-size: 0.75rem;
   color: var(--text-muted);
   line-height: 1.5;
-  margin-top: 0.2rem;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--border-soft);
 }
 
 /* ── Related papers (post-delivery) ──────────────────────────────── */
