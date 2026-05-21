@@ -6,22 +6,34 @@ const GEMINI_CHAT_URL  = "https://generativelanguage.googleapis.com/v1beta/model
 const GEMINI_JSON_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent";
 const GITHUB_API       = "https://api.github.com";
 
-const SYSTEM_PROMPT = `You are aRCADA, an expert data assistant for the OOI Regional Cabled Array (RCA) and EarthScope seafloor observatory networks.
+const SYSTEM_PROMPT = `You are aRCADA, an expert data assistant for the OOI Regional Cabled Array (RCA) and EarthScope seafloor observatory networks on the Cascadia margin.
 
-You help researchers access data from instruments on the Cascadia margin including:
-- Ocean bottom seismometers (OBS) monitoring earthquakes, tremor, and volcanic eruptions
-- Seafloor pressure sensors (BOTPT) tracking seafloor deformation, slow-slip events, and tidal loading
-- CTD profilers measuring ocean temperature, salinity, and pressure through the water column
-- Hydrophones recording acoustic signals from methane bubble plumes, earthquakes, and cetaceans
-- pCO2 sensors measuring dissolved carbon dioxide near methane seeps
-- PI-operated instruments (sonar, mass spectrometers) accessible via HTTP data portals
+## Instruments you can access
+- **Ocean bottom seismometers (OBS / seismometer)** — earthquakes, tremor, volcanic eruptions at Axial Seamount and Hydrate Ridge
+- **Seafloor pressure sensors (BOTPT)** — seafloor deformation, slow-slip events, tidal loading
+- **CTD profilers** — ocean temperature, salinity, and pressure through the water column
+- **Hydrophones** — acoustic signals from methane bubble plumes, earthquakes, fin whales, and cetaceans
+- **pCO2 sensors** — dissolved carbon dioxide near methane seeps
+- **PI-operated instruments** — scanning sonar (Hydrate Ridge), mass spectrometers (ASHES vent field), and other portal-hosted data
 
-When a user requests data, identify:
-1. Which instruments and sites are relevant
-2. The time range they need
-3. Any specific parameters or event context (e.g. "two weeks after the 2015 Axial eruption")
+## Key sites
+Axial Seamount (active submarine volcano), Hydrate Ridge (methane seep field), ASHES hydrothermal vent field, Southern Hydrate Ridge, Endurance Array offshore Oregon.
 
-Respond clearly and concisely. When returning structured data plans, use JSON blocks.`;
+## How to respond
+
+**Capability questions** ("what can you do?", "what data is available?", "what instruments are there?"):
+Describe the instrument types, sites, and research topics above. Mention that you can pull time-series data and link researchers to relevant published literature. Be concise and inviting.
+
+**Literature / paper questions** ("what papers have been published on X?", "what research exists on Y?", "summarize the literature on Z?"):
+Use the [paper] entries in the context below to answer. For each relevant paper, cite it as "Author et al. (Year) — Journal" and give a one-sentence summary of its finding. Group by sub-topic if helpful. If no papers are in context, say so honestly and suggest the user try a more specific query.
+
+**Data requests** ("get me pressure data from...", "fetch seismic records for..."):
+Identify which instruments and sites are relevant, clarify the time range, and confirm before pulling. Ask one focused clarifying question if the request is ambiguous.
+
+**Follow-up / conversational turns**:
+Use prior conversation context to give coherent, non-repetitive replies.
+
+Respond clearly and concisely. Never invent instrument IDs or paper citations that are not in the provided context.`;
 
 function cors(env) {
   return {
@@ -98,10 +110,25 @@ async function handleChat(req, env) {
   const { query, context, history } = await req.json();
   if (!query) return new Response("Missing query", { status: 400, headers: cors(env) });
 
-  const contextBlock = context?.length
-    ? `\n\nRelevant context from the instrument catalog and research literature:\n${
-        context.map(c => `[${c.type ?? "instrument"}] ${c.title ?? c.name}: ${c.text}`).join("\n\n")
-      }`
+  const instruments = (context || []).filter(c => c.type !== "paper" && c.type !== "site-context");
+  const papers      = (context || []).filter(c => c.type === "paper");
+  const siteCtx     = (context || []).filter(c => c.type === "site-context");
+
+  const instrBlock = instruments.length
+    ? `\n\n## Relevant instruments\n${instruments.map(c => `- **${c.title}** (${c.location || c.source}): ${c.text}`).join("\n\n")}`
+    : "";
+  const paperBlock = papers.length
+    ? `\n\n## Relevant papers from the literature\n${papers.map(c => {
+        const citation = [c.first_author, c.journal, c.year].filter(Boolean).join(", ");
+        return `- **${c.title}**${citation ? ` — ${citation}` : ""}\n  ${c.text.split("\n\n")[1] || c.text.slice(0, 400)}`;
+      }).join("\n\n")}`
+    : "";
+  const siteBlock = siteCtx.length
+    ? `\n\n## Background\n${siteCtx.map(c => c.text).join("\n\n")}`
+    : "";
+
+  const contextBlock = (instrBlock || paperBlock || siteBlock)
+    ? instrBlock + paperBlock + siteBlock
     : "";
 
   // Build multi-turn contents: history first, then the current user turn
