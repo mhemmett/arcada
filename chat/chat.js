@@ -27,20 +27,24 @@ let CURRENT_MODE = "ask"; // "ask" | "literature" | "data"
 // ── Rate limiter ──────────────────────────────────────────────────────────────
 // gemini-2.0-flash:      15 RPM free tier → 4s min between calls
 // gemini-2.0-flash-lite: 30 RPM free tier → 2s min between calls
+// Timestamps persisted to sessionStorage so page reloads don't reset the window.
 const RL = {
-  flash:     { ms: 4200, last: 0 },
-  flashLite: { ms: 2200, last: 0 },
+  flash:     { ms: 4200, key: "rl_flash_last" },
+  flashLite: { ms: 2200, key: "rl_flash_lite_last" },
 };
 
+function rlGet(r)      { return parseInt(sessionStorage.getItem(r.key) || "0", 10); }
+function rlSet(r)      { sessionStorage.setItem(r.key, String(Date.now())); }
+
 async function throttle(model) {
-  const r = RL[model];
-  const wait = r.ms - (Date.now() - r.last);
+  const r    = RL[model];
+  const wait = r.ms - (Date.now() - rlGet(r));
   if (wait > 0) {
     setStatus(`Rate limiting — waiting ${(wait / 1000).toFixed(1)}s…`);
     await new Promise(res => setTimeout(res, wait));
     setStatus("");
   }
-  r.last = Date.now();
+  rlSet(r);
 }
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
@@ -153,47 +157,12 @@ function promptPassword() {
 
 // ── Welcome message ───────────────────────────────────────────────────────────
 
-async function showWelcome() {
+function showWelcome() {
+  const text = "Welcome to aRCADA. I can answer questions about RCA instruments and sites, surface relevant published research, or generate a ready-to-run Python script for any data request. Select a mode above and describe what you're looking for.";
   const contentEl = addMessage("assistant", "");
-  contentEl.innerHTML = '<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>';
-
-  try {
-    const papers  = CHUNKS.filter(c => c.type === "paper" && c.first_author && c.year);
-    const samples = sampleDiversePapers(papers, 3);
-    await throttle("flashLite");
-    const res = await workerPost("/welcome", {
-      paperSamples: samples.map(p => ({ title: p.title, first_author: p.first_author, year: p.year })),
-    });
-    const text = res.text || "Hello! I'm aRCADA. What would you like to explore today?";
-    contentEl.innerHTML = renderMarkdown(text);
-    // Seed history with a synthetic exchange so subsequent turns have context
-    HISTORY.push({ role: "user",  parts: [{ text: "Hello!" }] });
-    HISTORY.push({ role: "model", parts: [{ text: text }] });
-  } catch {
-    const fallback = "Hello! I'm aRCADA, your Regional Cabled Array data assistant. I can help you access seismic, geochemical, acoustic, and oceanographic data from the Cascadia margin. What would you like to explore today?";
-    contentEl.textContent = fallback;
-    HISTORY.push({ role: "user",  parts: [{ text: "Hello!" }] });
-    HISTORY.push({ role: "model", parts: [{ text: fallback }] });
-  }
-}
-
-function sampleDiversePapers(papers, n) {
-  const topics = ["seismic", "eruption", "methane", "hydrophone", "fin whale", "hydrothermal", "carbon", "tremor", "sonar", "ctd", "earthquake", "acoustic"];
-  const picked = [];
-  for (const topic of topics) {
-    if (picked.length >= n) break;
-    const match = papers.find(p =>
-      !picked.includes(p) &&
-      (p.title.toLowerCase().includes(topic) || (p.keywords || []).some(k => k.toLowerCase().includes(topic)))
-    );
-    if (match) picked.push(match);
-  }
-  // Fill remaining slots from unpicked papers
-  const rest = papers.filter(p => !picked.includes(p));
-  while (picked.length < n && rest.length) {
-    picked.push(rest.splice(Math.floor(Math.random() * rest.length), 1)[0]);
-  }
-  return picked;
+  contentEl.textContent = text;
+  HISTORY.push({ role: "user",  parts: [{ text: "Hello!" }] });
+  HISTORY.push({ role: "model", parts: [{ text: text }] });
 }
 
 // ── Retrieval ─────────────────────────────────────────────────────────────────
