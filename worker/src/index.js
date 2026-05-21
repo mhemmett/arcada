@@ -58,13 +58,16 @@ async function handleEmbed(req, env) {
   const { text } = await req.json();
   if (!text) return new Response("Missing text", { status: 400, headers: cors(env) });
 
-  const vec = await retry(() =>
-    fetch(`${GEMINI_EMBED_URL}?key=${env.GEMINI_API_KEY}`, {
+  const vec = await retry(async () => {
+    const r = await fetch(`${GEMINI_EMBED_URL}?key=${env.GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ model: "models/gemini-embedding-2", content: { parts: [{ text }] }, outputDimensionality: 768 }),
-    }).then(r => r.json()).then(r => r.embedding.values)
-  );
+    });
+    if (!r.ok) throw new Error(`Gemini embed ${r.status}`);
+    const data = await r.json();
+    return data.embedding.values;
+  });
 
   return Response.json({ embedding: vec }, { headers: cors(env) });
 }
