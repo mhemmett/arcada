@@ -143,16 +143,28 @@ async function handleChat(req, env) {
   const geminiReq = {
     system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
     contents,
-    generationConfig: { temperature: 0.3 },
+    generationConfig: { temperature: 0.3, thinkingConfig: { thinkingBudget: 1024 } },
   };
 
-  const upstream = await retry(() =>
-    fetch(`${GEMINI_CHAT_URL}&key=${env.GEMINI_API_KEY}`, {
+  let upstream;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    upstream = await fetch(`${GEMINI_CHAT_URL}&key=${env.GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(geminiReq),
-    })
-  );
+    });
+    if (upstream.status !== 429) break;
+    const wait = [2000, 5000, 10000][attempt] ?? 10000;
+    await new Promise(r => setTimeout(r, wait));
+  }
+
+  if (!upstream.ok) {
+    const errBody = await upstream.text();
+    const msg = upstream.status === 429
+      ? "The AI model is rate-limited. Please wait a moment and try again."
+      : `Gemini error ${upstream.status}: ${errBody.slice(0, 200)}`;
+    return new Response(JSON.stringify({ error: msg }), { status: upstream.status, headers: { ...cors(env), "Content-Type": "application/json" } });
+  }
 
   return new Response(upstream.body, {
     headers: { ...cors(env), "Content-Type": "text/event-stream", "Cache-Control": "no-cache" },
