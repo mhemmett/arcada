@@ -1,6 +1,49 @@
-/* aRCADA Chat UI — dark ocean theme drawing on OOI RCA visual identity */
+/* aRCADA Chat UI — light/dark theme drawing on OOI RCA visual identity */
 
 :root {
+  /* Light theme (default) */
+  --bg:          #f5f7fb;
+  --bg-panel:    #ffffff;
+  --bg-card:     #edf1f8;
+  --bg-input:    #ffffff;
+  --border:      rgba(0, 85, 204, 0.25);
+  --border-soft: rgba(0, 85, 204, 0.13);
+
+  --accent:      #0055cc;
+  --accent-dim:  #003da5;
+  --accent-glow: rgba(0, 85, 204, 0.08);
+  --teal:        #0055cc;
+  --teal-dim:    rgba(0, 85, 204, 0.12);
+  --teal-glow:   rgba(0, 85, 204, 0.06);
+  --teal-border: rgba(0, 85, 204, 0.18);
+
+  --text:        #0a1a3a;
+  --text-muted:  #4a6090;
+  --text-faint:  #8aabcf;
+
+  --success:     #1b5e20;
+  --success-bg:  rgba(27, 94, 32, 0.08);
+  --error:       #c62828;
+  --error-bg:    rgba(198, 40, 40, 0.08);
+
+  --header-bg:       rgba(245, 247, 251, 0.92);
+  --badge-ooi-text:  #0055cc;
+  --badge-pi-text:   #8a4000;
+  --badge-pi-bg:     rgba(140, 70, 0, 0.10);
+  --error-text:      #b71c1c;
+  --code-bg:         rgba(0, 0, 0, 0.05);
+  --overlay-bg:      rgba(20, 40, 80, 0.50);
+  --gate-bg:         rgba(245, 247, 251, 0.97);
+  --paper-hover:     rgba(0, 85, 204, 0.04);
+
+  --radius:      6px;
+  --radius-lg:   12px;
+  --font-mono:   "DM Mono", "Fira Mono", monospace;
+  --font-ui:     "Syne", "Inter", system-ui, sans-serif;
+  --font-body:   "Inter", system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
   --bg:          #050d1a;
   --bg-panel:    #0a1628;
   --bg-card:     #0e1e35;
@@ -8,12 +51,13 @@
   --border:      #1a3054;
   --border-soft: #122540;
 
-  /* OOI-inspired blues */
   --accent:      #0066cc;
   --accent-dim:  #003da5;
   --accent-glow: rgba(0, 102, 204, 0.18);
   --teal:        #00b4d8;
   --teal-dim:    rgba(0, 180, 216, 0.12);
+  --teal-glow:   rgba(0, 180, 216, 0.06);
+  --teal-border: rgba(0, 180, 216, 0.15);
 
   --text:        #dce8f8;
   --text-muted:  #6a8db5;
@@ -24,11 +68,15 @@
   --error:       #c62828;
   --error-bg:    rgba(198, 40, 40, 0.10);
 
-  --radius:      6px;
-  --radius-lg:   12px;
-  --font-mono:   "DM Mono", "Fira Mono", monospace;
-  --font-ui:     "Syne", "Inter", system-ui, sans-serif;
-  --font-body:   "Inter", system-ui, sans-serif;
+  --header-bg:       rgba(5, 13, 26, 0.92);
+  --badge-ooi-text:  #6ab4ff;
+  --badge-pi-text:   #ffb74d;
+  --badge-pi-bg:     rgba(255, 165, 0, 0.12);
+  --error-text:      #ef9a9a;
+  --code-bg:         rgba(0, 0, 0, 0.35);
+  --overlay-bg:      rgba(0, 0, 0, 0.70);
+  --gate-bg:         rgba(5, 13, 26, 0.96);
+  --paper-hover:     rgba(0, 180, 216, 0.05);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,7 +100,7 @@ body {
   padding: 0 2rem;
   height: 56px;
   border-bottom: 1px solid var(--border-soft);
-  background: rgba(5, 13, 26, 0.92);
+  background: var(--header-bg);
   backdrop-filter: blur(8px);
   position: sticky;
   top: 0;
@@ -162,9 +210,9 @@ a.instrument-card:hover { border-color: var(--accent); background: var(--accent-
   border-radius: 3px;
   margin-top: 0.3rem;
 }
-.badge-ooi_api    { background: rgba(0, 102, 204, 0.2); color: #6ab4ff; }
+.badge-ooi_api    { background: var(--accent-glow); color: var(--badge-ooi-text); }
 .badge-earthscope { background: rgba(0, 180, 216, 0.15); color: var(--teal); }
-.badge-pi_html    { background: rgba(255, 165, 0, 0.12); color: #ffb74d; }
+.badge-pi_html    { background: var(--badge-pi-bg); color: var(--badge-pi-text); }
 
 /* ── Paper cards in panel ────────────────────────────────────────── */
 #paperList { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -180,7 +228,7 @@ a.instrument-card:hover { border-color: var(--accent); background: var(--accent-
   display: block;
   transition: border-color 0.15s, background 0.15s;
 }
-a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.05); cursor: pointer; }
+a.paper-card:hover { border-color: var(--teal); background: var(--paper-hover); cursor: pointer; }
 
 .paper-card-title {
   font-weight: 500;
@@ -244,7 +292,7 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
 .message.error {
   background: var(--error-bg);
   border: 1px solid var(--error);
-  color: #ef9a9a;
+  color: var(--error-text);
 }
 
 .message-label {
@@ -257,7 +305,7 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
 }
 
 .message pre {
-  background: rgba(0,0,0,0.3);
+  background: var(--code-bg);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius);
   padding: 0.75rem;
@@ -338,7 +386,7 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
 /* ── Modal ───────────────────────────────────────────────────────── */
 .modal-overlay {
   position: fixed; inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: var(--overlay-bg);
   display: flex; align-items: center; justify-content: center;
   z-index: 500;
   backdrop-filter: blur(4px);
@@ -356,7 +404,7 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
 .modal-title { font-family: var(--font-ui); font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
 .modal-body { font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.5rem; }
 .modal-body strong { color: var(--text); }
-.modal-body code { font-family: var(--font-mono); font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 0.1em 0.35em; border-radius: 3px; }
+.modal-body code { font-family: var(--font-mono); font-size: 0.8rem; background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 3px; }
 
 .modal-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 .btn-primary {
@@ -388,7 +436,7 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
 /* ── Password gate ───────────────────────────────────────────────── */
 .password-gate {
   position: fixed; inset: 0;
-  background: rgba(5, 13, 26, 0.96);
+  background: var(--gate-bg);
   display: flex; align-items: center; justify-content: center;
   z-index: 600;
   backdrop-filter: blur(6px);
@@ -446,7 +494,7 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
 .password-error {
   margin-top: 0.6rem;
   font-size: 0.78rem;
-  color: #ef9a9a;
+  color: var(--error-text);
 }
 .password-error[hidden] { display: none; }
 
@@ -480,13 +528,13 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
 .message-content code {
   font-family: var(--font-mono);
   font-size: 0.82em;
-  background: rgba(0,0,0,0.35);
+  background: var(--code-bg);
   padding: 0.1em 0.4em;
   border-radius: 3px;
   color: var(--teal);
 }
 .message-content pre {
-  background: rgba(0,0,0,0.35);
+  background: var(--code-bg);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius);
   padding: 0.75rem;
@@ -524,8 +572,8 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
   align-items: baseline;
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
-  background: rgba(0,180,216,0.06);
-  border: 1px solid rgba(0,180,216,0.15);
+  background: var(--teal-glow);
+  border: 1px solid var(--teal-border);
   border-radius: var(--radius);
 }
 .plan-time-dates {
@@ -603,6 +651,24 @@ a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.
 .related-paper-doi { color: var(--text-faint); }
 .paper-doi-link { color: var(--teal); text-decoration: none; }
 .paper-doi-link:hover { text-decoration: underline; }
+
+/* ── Theme toggle ────────────────────────────────────────────────── */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--accent); background: var(--accent-glow); }
 
 /* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {

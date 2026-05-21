@@ -24,6 +24,7 @@ let HISTORY = [];
 // ── Boot ──────────────────────────────────────────────────────────────────────
 
 async function boot() {
+  initTheme();
   CONFIG     = await fetch("config.json").then(r => r.json());
   WORKER_URL = CONFIG.workerUrl;
   EMBED_DIM  = CONFIG.embedDim || 768;
@@ -746,6 +747,36 @@ async function pollJob(runId, plan, context = []) {
 
   setStatus("");
   addMessage("error", "Timed out waiting for data pull job. Check GitHub Actions for job status.");
+}
+
+// ── Theme ─────────────────────────────────────────────────────────────────────
+
+function initTheme() {
+  const saved = localStorage.getItem('arcada-theme');
+  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  updateThemeIcon();
+  document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('arcada-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('arcada-theme', 'dark');
+  }
+  updateThemeIcon();
+}
+
+function updateThemeIcon() {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  btn.querySelector('.icon-sun').hidden = !isDark;
+  btn.querySelector('.icon-moon').hidden = isDark;
 }
 
 boot().catch(console.error);
