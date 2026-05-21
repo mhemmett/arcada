@@ -608,7 +608,10 @@ function responseHasQuestion(text) {
 
 async function streamChatToElement(query, context, contentEl, history = []) {
   const resp = await streamChat(query, context, history);
-  if (!resp.ok) throw new Error(`Chat stream failed: ${resp.status}`);
+  if (!resp.ok) {
+    const body = await resp.json().catch(() => ({}));
+    throw new Error(body.error || `Chat stream failed: ${resp.status}`);
+  }
 
   contentEl.innerHTML = '<span class="thinking-indicator">Thinking<span class="thinking-dots"></span></span>';
 
