@@ -357,6 +357,33 @@ function showDownloadModal(metadata) {
   document.getElementById("modalOverlay").hidden = false;
 }
 
+// ── URL helpers ───────────────────────────────────────────────────────────────
+
+function getInstrumentUrl(chunk) {
+  const id = chunk.id.replace(/::.*$/, "");
+  if (chunk.source === "pi_html") {
+    // PI-MASSP-ASHES → class "massp"; PI-OVRSRA101 → fall back to piweb
+    const seg = id.split("-")[1] || "";
+    const isAlpha = /^[A-Za-z]+$/.test(seg);
+    return isAlpha
+      ? `https://oceanobservatories.org/instrument-class/${seg.toLowerCase()}/`
+      : "http://piweb.ooirsn.uw.edu/marum/";
+  }
+  // OOI / EarthScope reference designator: RS01SBPD-DP01A-01-CTDPFL104
+  // Instrument class = first 5 alpha chars of last segment
+  const segs = id.split("-");
+  if (segs.length >= 4) {
+    const m = segs[segs.length - 1].match(/^([A-Z]{5})/);
+    if (m) return `https://oceanobservatories.org/instrument-class/${m[1].toLowerCase()}/`;
+  }
+  return null;
+}
+
+function getPaperUrl(chunk) {
+  const doi = chunk.id.replace(/^paper::/, "");
+  return doi.startsWith("10.") ? `https://doi.org/${doi}` : null;
+}
+
 // ── Instrument / paper panel ──────────────────────────────────────────────────
 
 function renderInstruments(chunks) {
@@ -378,8 +405,10 @@ function renderInstruments(chunks) {
   instruments.forEach((c, i) => {
     if (seenInstr.has(c.id)) return;
     seenInstr.add(c.id);
-    const card = document.createElement("div");
+    const url  = getInstrumentUrl(c);
+    const card = document.createElement(url ? "a" : "div");
     card.className = `instrument-card ${i < 2 ? "primary" : "secondary"}`;
+    if (url) { card.href = url; card.target = "_blank"; card.rel = "noopener noreferrer"; }
     card.innerHTML = `
       <div class="instrument-card-name">${c.title}</div>
       <div class="instrument-card-meta">${c.location || ""}</div>
@@ -395,8 +424,10 @@ function renderInstruments(chunks) {
     papers.forEach(c => {
       if (seenPaper.has(c.id)) return;
       seenPaper.add(c.id);
-      const card = document.createElement("div");
+      const url  = getPaperUrl(c);
+      const card = document.createElement(url ? "a" : "div");
       card.className = "paper-card";
+      if (url) { card.href = url; card.target = "_blank"; card.rel = "noopener noreferrer"; }
       card.innerHTML = `
         <div class="paper-card-title">${c.title}</div>
         <span class="paper-card-citation">${buildCitation(c)}</span>

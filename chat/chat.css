@@ -142,7 +142,11 @@ body {
   padding: 0.6rem 0.75rem;
   font-size: 0.78rem;
   line-height: 1.45;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.15s, background 0.15s;
 }
+a.instrument-card:hover { border-color: var(--accent); background: var(--accent-glow); cursor: pointer; }
 .instrument-card.primary   { border-color: var(--accent); background: var(--accent-glow); }
 .instrument-card.secondary { border-color: var(--border-soft); background: var(--bg-card); }
 
@@ -172,7 +176,11 @@ body {
   font-size: 0.78rem;
   line-height: 1.45;
   background: var(--bg-card);
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.15s, background 0.15s;
 }
+a.paper-card:hover { border-color: var(--teal); background: rgba(0, 180, 216, 0.05); cursor: pointer; }
 
 .paper-card-title {
   font-weight: 500;
