@@ -8,6 +8,7 @@
       "doi": "10.1029/2025CN000288",
       "year": 2025,
       "journal": "Perspectives of Earth and Space Scientists",
+      "first_author": "Zumberge",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -23,6 +24,7 @@
       "doi": "10.1121/10.0039811",
       "year": 2025,
       "journal": "JASA Express Letters",
+      "first_author": "Ragland",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -35,6 +37,7 @@
       "doi": "10.1007/s44267-025-00085-y",
       "year": 2025,
       "journal": "Visual Intelligence",
+      "first_author": "Ding",
       "tags": [
         "Earthquake monitoring",
         "Image imputation",
@@ -57,6 +60,7 @@
       "doi": "10.3389/fmars.2025.1603541",
       "year": 2025,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Horne",
       "tags": [
         "distributed acoustic sensing",
         "passive acoustic monitoring",
@@ -81,6 +85,7 @@
       "doi": "10.1146/annurev-earth-040522-095654",
       "year": 2025,
       "journal": "Annual Review of Earth and Planetary Sciences",
+      "first_author": "Carey",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -97,6 +102,7 @@
       "doi": "10.1121/10.0036696",
       "year": 2025,
       "journal": "The Journal of the Acoustical Society of America",
+      "first_author": "Goestchel",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -109,6 +115,7 @@
       "doi": "10.1121/10.0036351",
       "year": 2025,
       "journal": "JASA Express Letters",
+      "first_author": "Bouffaut",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -123,6 +130,7 @@
       "doi": "10.1109/JOE.2024.3521256",
       "year": 2025,
       "journal": "IEEE Journal of Oceanic Engineering",
+      "first_author": "Caress",
       "tags": [
         "Autonomous underwater vehicle (AUV)",
         "Cameras",
@@ -161,6 +169,7 @@
       "doi": "10.1029/2024JB030481",
       "year": 2025,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Wang",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -181,6 +190,7 @@
       "doi": "10.1016/j.apor.2025.104422",
       "year": 2025,
       "journal": "Applied Ocean Research",
+      "first_author": "Paap",
       "tags": [
         "Distributed Acoustic Sensing",
         "Seabed infrastructure",
@@ -197,6 +207,7 @@
       "doi": "10.1029/2024AV001560",
       "year": 2025,
       "journal": "AGU Advances",
+      "first_author": "PI-team",
       "tags": [
         "academic research fleet",
         "AUV",
@@ -212,6 +223,7 @@
       "doi": "10.1029/2024JB029728",
       "year": 2025,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Shi",
       "tags": [
         "denoising",
         "distributed acoustic sensing",
@@ -236,6 +248,7 @@
       "doi": "10.1093/icesjms/fsae133",
       "year": 2024,
       "journal": "ICES Journal of Marine Science",
+      "first_author": "Lee",
       "tags": [],
       "linked_instruments": [
         "PI-OVRSRA101"
@@ -247,6 +260,7 @@
       "doi": "10.1126/science.adh9607",
       "year": 2024,
       "journal": "Science",
+      "first_author": "Vance",
       "tags": [],
       "linked_instruments": []
     },
@@ -256,6 +270,7 @@
       "doi": "10.1016/j.epsl.2024.118625",
       "year": 2024,
       "journal": "Earth and Planetary Science Letters",
+      "first_author": "Barkat",
       "tags": [
         "Dynamic earthquake triggering",
         "Permeability changes",
@@ -283,6 +298,7 @@
       "doi": "10.1029/2023CN000225",
       "year": 2024,
       "journal": "Perspectives of Earth and Space Scientists",
+      "first_author": "Davis",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -300,6 +316,7 @@
       "doi": "10.1029/2023EF004126",
       "year": 2024,
       "journal": "Earth's Future",
+      "first_author": "Saunders",
       "tags": [
         "alert performance",
         "earthquake early warning",
@@ -325,6 +342,7 @@
       "doi": "10.1029/2023GL105464",
       "year": 2024,
       "journal": "Geophysical Research Letters",
+      "first_author": "Dong",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -340,6 +358,7 @@
       "doi": "10.1029/2023JB027799",
       "year": 2024,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Shen",
       "tags": [
         "14 Life Below Water",
         "curvelet denoising",
@@ -366,6 +385,7 @@
       "doi": "10.1002/9781119750925.ch4",
       "year": 2024,
       "journal": null,
+      "first_author": "Aiken",
       "tags": [
         "monitoring",
         "submarine volcanoes",
@@ -390,6 +410,7 @@
       "doi": "10.1093/gji/ggad460",
       "year": 2024,
       "journal": "Geophysical Journal International",
+      "first_author": "Lapins",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -407,6 +428,7 @@
       "doi": "10.5670/oceanog.2023.203",
       "year": 2023,
       "journal": "Oceanography",
+      "first_author": "Dziak",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-09-THSPHD000",
@@ -421,6 +443,7 @@
       "doi": "10.3390/jmse11112074",
       "year": 2023,
       "journal": "Journal of Marine Science and Engineering",
+      "first_author": "Shu",
       "tags": [
         "network structure",
         "ocean observatory",
@@ -436,6 +459,7 @@
       "doi": "10.1038/s44183-023-00023-9",
       "year": 2023,
       "journal": "npj Ocean Sustainability",
+      "first_author": "Tzachor",
       "tags": [
         "Engineering",
         "Environmental studies",
@@ -450,6 +474,7 @@
       "doi": "10.1121/10.0023334",
       "year": 2023,
       "journal": "The Journal of the Acoustical Society of America",
+      "first_author": "Ragland",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-09-THSPHD000",
@@ -464,6 +489,7 @@
       "doi": "10.3397/IN_2023_1041",
       "year": 2023,
       "journal": "INTER-NOISE and NOISE-CON Congress and Conference Proceedings",
+      "first_author": "Kim",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -476,6 +502,7 @@
       "doi": "10.3389/fmars.2023.1197338",
       "year": 2023,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Redick",
       "tags": [],
       "linked_instruments": [
         "PI-MASSP-ASHES",
@@ -488,6 +515,7 @@
       "doi": "10.1007/978-3-031-16277-0_6",
       "year": 2023,
       "journal": null,
+      "first_author": "Lubchenco",
       "tags": [],
       "linked_instruments": []
     },
@@ -497,6 +525,7 @@
       "doi": "10.7717/peerj.15119",
       "year": 2023,
       "journal": "PeerJ",
+      "first_author": "Cummings",
       "tags": [],
       "linked_instruments": [
         "PI-MASSP-ASHES",
@@ -509,6 +538,7 @@
       "doi": "10.1126/sciadv.add6688",
       "year": 2023,
       "journal": "Science Advances",
+      "first_author": "Philip",
       "tags": [
         "3706 Geophysics"
       ],
@@ -525,6 +555,7 @@
       "doi": "10.1121/10.0017104",
       "year": 2023,
       "journal": "JASA Express Letters",
+      "first_author": "Wilcock",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -537,6 +568,7 @@
       "doi": "10.1029/2022EA002434",
       "year": 2023,
       "journal": "Earth and Space Science",
+      "first_author": "Sasagawa",
       "tags": [
         "instruments and technique",
         "ocean observatories and experiments",
@@ -561,6 +593,7 @@
       "doi": "10.1121/10.0019703",
       "year": 2023,
       "journal": "JASA Express Letters",
+      "first_author": "Douglass",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -573,6 +606,7 @@
       "doi": "10.1121/10.0020514",
       "year": 2023,
       "journal": "JASA Express Letters",
+      "first_author": "Gemba",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -585,6 +619,7 @@
       "doi": "10.3389/fmars.2023.1025464",
       "year": 2023,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Ferguson",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -597,6 +632,7 @@
       "doi": "10.1029/2023JB026413",
       "year": 2023,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Cook",
       "tags": [
         "seafloor geodesy",
         "absolute pressure",
@@ -621,6 +657,7 @@
       "doi": "10.1121/10.0009232",
       "year": 2022,
       "journal": "The Journal of the Acoustical Society of America",
+      "first_author": "Ragland",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -633,6 +670,7 @@
       "doi": "10.5194/os-18-233-2022",
       "year": 2022,
       "journal": "Ocean Science",
+      "first_author": "Dølven",
       "tags": [],
       "linked_instruments": [
         "PI-MASSP-ASHES",
@@ -649,6 +687,7 @@
       "doi": "10.1029/2021GC010153",
       "year": 2022,
       "journal": "Geochemistry Geophysics Geosystems",
+      "first_author": "Chadwick",
       "tags": [
         "inflation",
         "bottom pressure recorders",
@@ -686,6 +725,7 @@
       "doi": "10.1016/j.dsr.2022.103809",
       "year": 2022,
       "journal": "Deep Sea Research Part I: Oceanographic Research Papers",
+      "first_author": "Seyfried",
       "tags": [
         "Cabled array",
         "Main Endeavour Field",
@@ -710,6 +750,7 @@
       "doi": "10.3389/fmars.2022.796376",
       "year": 2022,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Nomikou",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -731,6 +772,7 @@
       "doi": "10.1016/j.apor.2022.103193",
       "year": 2022,
       "journal": "Applied Ocean Research",
+      "first_author": "Korde",
       "tags": [
         "Deep ocean sensing",
         "Interacting surface waves",
@@ -749,6 +791,7 @@
       "doi": "10.1029/2021EA001974",
       "year": 2022,
       "journal": "Earth and Space Science",
+      "first_author": "Jackson",
       "tags": [
         "sonar",
         "Deep-Sea Hydrothermal",
@@ -774,6 +817,7 @@
       "doi": "10.3389/feart.2021.775544",
       "year": 2022,
       "journal": "Frontiers in Earth Science",
+      "first_author": "Howe",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -793,6 +837,7 @@
       "doi": "10.3390/jmse10081051",
       "year": 2022,
       "journal": "Journal of Marine Science and Engineering",
+      "first_author": "Chen",
       "tags": [
         "data communication",
         "data quality control",
@@ -809,6 +854,7 @@
       "doi": null,
       "year": 2022,
       "journal": null,
+      "first_author": "Carlson",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -828,6 +874,7 @@
       "doi": "10.1029/2022GL100006",
       "year": 2022,
       "journal": "Geophysical Research Letters",
+      "first_author": "Biasi",
       "tags": [
         "Iceland",
         "monitoring",
@@ -854,6 +901,7 @@
       "doi": "10.1016/j.esg.2022.100141",
       "year": 2022,
       "journal": "Earth System Governance",
+      "first_author": "Bakker",
       "tags": [
         "Machine learning",
         "artificial intelligence",
@@ -872,6 +920,7 @@
       "doi": "10.3389/fmars.2022.1018751",
       "year": 2022,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Zhang",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-09-THSPHD000",
@@ -888,6 +937,7 @@
       "doi": "10.1121/10.0009836",
       "year": 2022,
       "journal": "The Journal of the Acoustical Society of America",
+      "first_author": "Ragland",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -905,6 +955,7 @@
       "doi": "10.3390/jmse10020297",
       "year": 2022,
       "journal": "Journal of Marine Science and Engineering",
+      "first_author": "Glaviano",
       "tags": [
         "aquaculture",
         "buoy",
@@ -923,6 +974,7 @@
       "doi": "10.1155/2022/1316439",
       "year": 2022,
       "journal": "Advances in Civil Engineering",
+      "first_author": "Fu",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -935,6 +987,7 @@
       "doi": "10.1029/2022GL100008",
       "year": 2022,
       "journal": "Geophysical Research Letters",
+      "first_author": "Fluegel",
       "tags": [
         "monitoring",
         "magnetism",
@@ -958,6 +1011,7 @@
       "doi": "10.1785/0120210214",
       "year": 2022,
       "journal": "Bulletin of the Seismological Society of America",
+      "first_author": "Farghal",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -975,6 +1029,7 @@
       "doi": "10.1007/978-3-030-81186-0_7",
       "year": 2022,
       "journal": null,
+      "first_author": "Bangs",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-HYS14",
@@ -990,6 +1045,7 @@
       "doi": "10.3389/fmars.2022.866422",
       "year": 2022,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Matabos",
       "tags": [
         "COMMUNITY DYNAMICS"
       ],
@@ -1009,6 +1065,7 @@
       "doi": "10.3389/fmars.2022.846701",
       "year": 2022,
       "journal": "Frontiers in Marine Science",
+      "first_author": "De Santis",
       "tags": [
         "campi flegrei",
         "deep sea",
@@ -1034,6 +1091,7 @@
       "doi": "10.5802/crgeos.119",
       "year": 2022,
       "journal": "Comptes Rendus. Géoscience",
+      "first_author": "Bazin",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1053,6 +1111,7 @@
       "doi": "10.4031/MTSJ.56.3.11",
       "year": 2022,
       "journal": "Marine Technology Society Journal",
+      "first_author": "Smith",
       "tags": [
         "ocean observing",
         "deep ocean",
@@ -1068,6 +1127,7 @@
       "doi": "10.3389/feart.2022.983051",
       "year": 2022,
       "journal": "Frontiers in Earth Science",
+      "first_author": "Saurel",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1087,6 +1147,7 @@
       "doi": "10.1121/10.0015231",
       "year": 2022,
       "journal": "The Journal of the Acoustical Society of America",
+      "first_author": "Ragland",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1104,6 +1165,7 @@
       "doi": "10.1029/2022GC010426",
       "year": 2022,
       "journal": "Geochemistry, Geophysics, Geosystems",
+      "first_author": "Lee",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1123,6 +1185,7 @@
       "doi": "10.1007/s00792-022-01263-2",
       "year": 2022,
       "journal": "Extremophiles",
+      "first_author": "Kashyap",
       "tags": [
         "Anaerobic bacteria",
         "Autotroph",
@@ -1150,6 +1213,7 @@
       "doi": "10.1038/s43017-022-00364-y",
       "year": 2022,
       "journal": "Nature Reviews Earth & Environment",
+      "first_author": "Früh-Green",
       "tags": [
         "Element cycles",
         "Geochemistry",
@@ -1169,6 +1233,7 @@
       "doi": "10.3390/jmse10030322",
       "year": 2022,
       "journal": "Journal of Marine Science and Engineering",
+      "first_author": "Ostrovskii",
       "tags": [
         "Black Sea",
         "carbon flux",
@@ -1185,6 +1250,7 @@
       "doi": "10.1121/10.0005192",
       "year": 2021,
       "journal": "Journal of the Acoustical Society of America",
+      "first_author": "Dahl",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-09-THSPHD000",
@@ -1199,6 +1265,7 @@
       "doi": "10.1029/2020EA001269",
       "year": 2021,
       "journal": "Earth and Space Science",
+      "first_author": "Xu",
       "tags": [
         "acoustic",
         "axial seamount",
@@ -1228,6 +1295,7 @@
       "doi": "10.1016/j.jvolgeores.2021.107319",
       "year": 2021,
       "journal": "Journal of Volcanology and Geothermal Research",
+      "first_author": "Sahoo",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1243,6 +1311,7 @@
       "doi": "10.1029/2021gc009894",
       "year": 2021,
       "journal": "Geochemistry Geophysics Geosystems",
+      "first_author": "Marcon",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-HYS14",
@@ -1259,6 +1328,7 @@
       "doi": "10.1128/msystems.00731-21",
       "year": 2021,
       "journal": "mSystems",
+      "first_author": "Anderson",
       "tags": [],
       "linked_instruments": []
     },
@@ -1268,6 +1338,7 @@
       "doi": "10.1029/2020jb020065",
       "year": 2021,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Watts",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-14-BOTPTA301",
@@ -1280,6 +1351,7 @@
       "doi": "10.1029/2020jb020912",
       "year": 2021,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Tepp",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1299,6 +1371,7 @@
       "doi": "10.1121/10.0007463",
       "year": 2021,
       "journal": "The Journal of the Acoustical Society of America",
+      "first_author": "Schwock",
       "tags": [],
       "linked_instruments": []
     },
@@ -1308,6 +1381,7 @@
       "doi": "10.3389/feart.2021.613234",
       "year": 2021,
       "journal": "Frontiers in Earth Science",
+      "first_author": "Michel",
       "tags": [
         "bubbles",
         "Cascadia Margin",
@@ -1330,6 +1404,7 @@
       "doi": "10.1016/j.isci.2021.103299",
       "year": 2021,
       "journal": "iScience",
+      "first_author": "Liang",
       "tags": [],
       "linked_instruments": []
     },
@@ -1339,6 +1414,7 @@
       "doi": "10.1029/2020jb021053",
       "year": 2021,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Kilb",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1354,6 +1430,7 @@
       "doi": "10.1121/10.0005440",
       "year": 2021,
       "journal": "The Journal of the Acoustical Society of America",
+      "first_author": "Schwock",
       "tags": [],
       "linked_instruments": []
     },
@@ -1363,6 +1440,7 @@
       "doi": "10.1029/2020jc016828",
       "year": 2021,
       "journal": "Journal of Geophysical Research - Oceans",
+      "first_author": "Reimers",
       "tags": [
         "bottom boundary layer",
         "eddy covariance",
@@ -1379,6 +1457,7 @@
       "doi": "10.1016/j.scitotenv.2021.145351",
       "year": 2021,
       "journal": "The Science of The Total Environment",
+      "first_author": "Mirimin",
       "tags": [
         "Cabled observatory",
         "Environmental DNA",
@@ -1395,6 +1474,7 @@
       "doi": "10.1016/j.jvolgeores.2021.107322",
       "year": 2021,
       "journal": "Journal of Volcanology and Geothermal Research",
+      "first_author": "Aiken",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1410,6 +1490,7 @@
       "doi": "10.1038/s41598-020-67043-0",
       "year": 2020,
       "journal": "Scientific Reports",
+      "first_author": "Cabaniss",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1430,6 +1511,7 @@
       "doi": "10.3390/jmse8030190",
       "year": 2020,
       "journal": "Journal of Marine Science and Engineering",
+      "first_author": "Yang",
       "tags": [
         "cabled seafloor observatories",
         "on-line fault location",
@@ -1447,6 +1529,7 @@
       "doi": "10.1029/2019JB018796",
       "year": 2020,
       "journal": "Journal of Geophysical Research-Solid Earth",
+      "first_author": "Waldhauser",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1466,6 +1549,7 @@
       "doi": "10.1186/s10033-020-00449-z",
       "year": 2020,
       "journal": "Chinese Journal of Mechanical Engineering",
+      "first_author": "Lin",
       "tags": [
         "observatory",
         "Ocean observation",
@@ -1486,6 +1570,7 @@
       "doi": "10.1029/2020gc009136",
       "year": 2020,
       "journal": "Geochemistry Geophysics Geosystems",
+      "first_author": "Le Saout",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1504,6 +1589,7 @@
       "doi": "10.1093/gji/ggaa203",
       "year": 2020,
       "journal": "Geophysical Journal International",
+      "first_author": "Kind",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1519,6 +1605,7 @@
       "doi": "10.1029/2020gc009085",
       "year": 2020,
       "journal": "Geochemistry Geophysics Geosystems",
+      "first_author": "Hilmo",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1534,6 +1621,7 @@
       "doi": "10.1029/2020jb019356",
       "year": 2020,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Hefner",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1554,6 +1642,7 @@
       "doi": "10.1029/2020gl087372",
       "year": 2020,
       "journal": "Geophysical Research Letters",
+      "first_author": "Fine",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1572,6 +1661,7 @@
       "doi": "10.1002/rob.21961",
       "year": 2020,
       "journal": "Journal of Field Robotics",
+      "first_author": "Yamada",
       "tags": [
         "acoustic",
         "axial seamount",
@@ -1601,6 +1691,7 @@
       "doi": "10.1029/2020gl088447",
       "year": 2020,
       "journal": "Geophysical Research Letters",
+      "first_author": "Moyer",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1620,6 +1711,7 @@
       "doi": "10.1121/10.0002670",
       "year": 2020,
       "journal": "Journal of the Acoustical Society of America",
+      "first_author": "Lee",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
@@ -1632,6 +1724,7 @@
       "doi": "10.1130/G46831.1",
       "year": 2020,
       "journal": "Geology",
+      "first_author": "Doran",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1652,6 +1745,7 @@
       "doi": "10.1029/2018GL080644",
       "year": 2019,
       "journal": "Geophysical Research Letters",
+      "first_author": "Yang",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1669,6 +1763,7 @@
       "doi": "10.1785/0120180319",
       "year": 2019,
       "journal": "Bulletin of the Seismological Society of America",
+      "first_author": "Williams",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1686,6 +1781,7 @@
       "doi": "10.3390/geosciences9030115",
       "year": 2019,
       "journal": "Geosciences",
+      "first_author": "Sgroi",
       "tags": [
         "Mt. Etna volcano",
         "oceanographic noise",
@@ -1708,6 +1804,7 @@
       "doi": "10.1177/1094342019877383",
       "year": 2019,
       "journal": "The International Journal of High Performance Computing Applications",
+      "first_author": "Balouek-Thomert",
       "tags": [
         "Continuum computing",
         "data-driven workflows",
@@ -1723,6 +1820,7 @@
       "doi": "10.3390/jmse7110414",
       "year": 2019,
       "journal": "Journal of Marine Science and Engineering",
+      "first_author": "Yu",
       "tags": [
         "control systems",
         "data processing",
@@ -1738,6 +1836,7 @@
       "doi": "10.3389/fmars.2019.00074",
       "year": 2019,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Trowbridge",
       "tags": [
         "biological oceanography",
         "chemical oceanography",
@@ -1764,6 +1863,7 @@
       "doi": "10.1029/2019EA000762",
       "year": 2019,
       "journal": "Earth and Space Science",
+      "first_author": "Scherwath",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1784,6 +1884,7 @@
       "doi": "10.3389/fmars.2019.00424",
       "year": 2019,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Howe",
       "tags": [
         "ocean observing",
         "ocean cabled observatories",
@@ -1811,6 +1912,7 @@
       "doi": "10.1029/2019JB018053",
       "year": 2019,
       "journal": "Journal of Geophysical Research-Solid Earth",
+      "first_author": "Fredrickson",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1828,6 +1930,7 @@
       "doi": "10.1029/2018GC007802",
       "year": 2019,
       "journal": "Geochemistry, Geophysics, Geosystems",
+      "first_author": "Baker",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1847,6 +1950,7 @@
       "doi": "10.1038/s41467-019-10605-2",
       "year": 2019,
       "journal": "Nature Communications",
+      "first_author": "Scholz",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1862,6 +1966,7 @@
       "doi": "10.1029/2018GC008112",
       "year": 2019,
       "journal": "Geochemistry, Geophysics, Geosystems",
+      "first_author": "Maurya",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1877,6 +1982,7 @@
       "doi": "10.1038/s41598-019-55918-w",
       "year": 2019,
       "journal": "Scientific Reports",
+      "first_author": "Matsumoto",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1896,6 +2002,7 @@
       "doi": "10.3390/app9153149",
       "year": 2019,
       "journal": "Applied Sciences",
+      "first_author": "Jiang",
       "tags": [
         "cabled seafloor observatories",
         "direct current power systems",
@@ -1910,6 +2017,7 @@
       "doi": "10.1029/2019JB017970",
       "year": 2019,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Baillard",
       "tags": [
         "axial seamount",
         "volcano",
@@ -1939,6 +2047,7 @@
       "doi": "10.1016/j.epsl.2019.01.047",
       "year": 2019,
       "journal": "Earth and Planetary Science Letters",
+      "first_author": "Tan",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -1958,6 +2067,7 @@
       "doi": "10.1016/j.scitotenv.2018.09.351",
       "year": 2019,
       "journal": "Science of The Total Environment",
+      "first_author": "Lopes",
       "tags": [
         "Adaptive management",
         "Biological communities",
@@ -1974,6 +2084,7 @@
       "doi": "10.3389/fmars.2019.00260",
       "year": 2019,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Frajka-Williams",
       "tags": [],
       "linked_instruments": []
     },
@@ -1983,6 +2094,7 @@
       "doi": "10.3389/fmars.2019.00093",
       "year": 2019,
       "journal": "Frontiers in Marine Science",
+      "first_author": "Barth",
       "tags": [
         "coastal oceanography",
         "data delivery",
@@ -2005,6 +2117,7 @@
       "doi": "10.5670/oceanog.2018.116",
       "year": 2018,
       "journal": "Oceanography",
+      "first_author": "Trehu",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2023,6 +2136,7 @@
       "doi": "10.5670/oceanog.2018.118",
       "year": 2018,
       "journal": "Oceanography",
+      "first_author": "Tolstoy",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2040,6 +2154,7 @@
       "doi": "10.1029/2017jb015131",
       "year": 2018,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Arnulf",
       "tags": [
         "axial seamount",
         "Juan de Fuca ridge",
@@ -2066,6 +2181,7 @@
       "doi": "10.1029/2018EA000418",
       "year": 2018,
       "journal": "Earth and Space Science",
+      "first_author": "Zumberge",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2083,6 +2199,7 @@
       "doi": "10.1029/2018gc007607",
       "year": 2018,
       "journal": "Geochemistry, Geophysics, Geosystems",
+      "first_author": "Xu",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2103,6 +2220,7 @@
       "doi": "10.5670/oceanog.2018.117",
       "year": 2018,
       "journal": "Oceanography",
+      "first_author": "Wilcock",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2122,6 +2240,7 @@
       "doi": "10.1038/s41467-018-05736-x",
       "year": 2018,
       "journal": "Nature Communications",
+      "first_author": "Riedel",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2138,6 +2257,7 @@
       "doi": "10.5670/oceanog.2018.115",
       "year": 2018,
       "journal": "Oceanography",
+      "first_author": "Reimers",
       "tags": [],
       "linked_instruments": [
         "RS01SUM2-MJ01B-09-THSPHD000",
@@ -2152,6 +2272,7 @@
       "doi": "10.4031/mtsj.52.3.4",
       "year": 2018,
       "journal": "Ohki, Takeshi",
+      "first_author": "Ohki",
       "tags": [
         "remotely operated vehicle (ROV)",
         "Cabled observatory",
@@ -2174,6 +2295,7 @@
       "doi": "10.1130/G45354.1",
       "year": 2018,
       "journal": "Geology",
+      "first_author": "Morton",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2189,6 +2311,7 @@
       "doi": "10.1130/G39978.1",
       "year": 2018,
       "journal": "Geology",
+      "first_author": "Levy",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2209,6 +2332,7 @@
       "doi": "10.1016/j.dsr2.2018.04.001",
       "year": 2018,
       "journal": "Deep Sea Research Part II: Topical Studies in Oceanography",
+      "first_author": "Dziak",
       "tags": [
         "Bubble streams",
         "E/V Nautilus Cruise ID NA072",
@@ -2228,6 +2352,7 @@
       "doi": "10.5670/oceanog.2018.120",
       "year": 2018,
       "journal": "Oceanography",
+      "first_author": "Spietz",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2252,6 +2377,7 @@
       "doi": "10.1029/2018GL078233",
       "year": 2018,
       "journal": "Geophysical Research Letters",
+      "first_author": "Saunders",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2271,6 +2397,7 @@
       "doi": "10.1029/2017JB015289",
       "year": 2018,
       "journal": "Journal of Geophysical Research: Solid Earth",
+      "first_author": "Krischer",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2286,6 +2413,7 @@
       "doi": "10.1038/ngeo2929",
       "year": 2017,
       "journal": "Nature Geoscience",
+      "first_author": "Kelley",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2301,6 +2429,7 @@
       "doi": "10.1002/2016jc012464",
       "year": 2017,
       "journal": "Journal of Geophysical Research-Oceans",
+      "first_author": "Xu",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2321,6 +2450,7 @@
       "doi": "10.5670/oceanog.2017.426",
       "year": 2017,
       "journal": "Oceanography",
+      "first_author": "Clague",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2338,6 +2468,7 @@
       "doi": "10.1002/2016gc006734",
       "year": 2017,
       "journal": "Geochemistry Geophysics Geosystems",
+      "first_author": "Caplan-Auerbach",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2360,6 +2491,7 @@
       "doi": "10.1126/science.aah5563",
       "year": 2016,
       "journal": "Science",
+      "first_author": "Wilcock",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2380,6 +2512,7 @@
       "doi": "10.1002/2016gl071884",
       "year": 2016,
       "journal": "Geophysical Research Letters",
+      "first_author": "Sigmundsson",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2400,6 +2533,7 @@
       "doi": "10.1002/2016EA000190",
       "year": 2016,
       "journal": "Earth and Space Science",
+      "first_author": "Sasagawa",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2418,6 +2552,7 @@
       "doi": "10.1002/2016GC006250",
       "year": 2016,
       "journal": "Geochemistry, Geophysics, Geosystems",
+      "first_author": "Philip",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-HYS14",
@@ -2435,6 +2570,7 @@
       "doi": "10.1126/science.aah4666",
       "year": 2016,
       "journal": "Science",
+      "first_author": "Nooner",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2455,6 +2591,7 @@
       "doi": "10.1002/2015gc006144",
       "year": 2016,
       "journal": "Geochemistry Geophysics Geosystems",
+      "first_author": "Mittelstaedt",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2476,6 +2613,7 @@
       "doi": "10.1002/2016GL071327",
       "year": 2016,
       "journal": "Geophysical Research Letters",
+      "first_author": "Chadwick Jr",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2495,6 +2633,7 @@
       "doi": "10.1175/Jtech-D-15-0103.1",
       "year": 2015,
       "journal": "Journal of Atmospheric and Oceanic Technology",
+      "first_author": "Alford",
       "tags": [
         "Observational techniques and algorithms",
         "oceanic",
@@ -2511,6 +2650,7 @@
       "doi": "10.5670/oceanog.2014.49",
       "year": 2014,
       "journal": "Oceanography",
+      "first_author": "Toomey",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
@@ -2528,6 +2668,7 @@
       "doi": "10.1016/j.margeo.2014.03.010",
       "year": 2014,
       "journal": "Marine Geology",
+      "first_author": "Kelley",
       "tags": [
         "axial seamount",
         "submarine volcanoes",
@@ -2555,6 +2696,7 @@
       "doi": "10.1038/ismej.2013.113",
       "year": 2013,
       "journal": "The ISME Journal",
+      "first_author": "Mattes",
       "tags": [],
       "linked_instruments": [
         "EARTHSCOPE-OO-AXCC1",
