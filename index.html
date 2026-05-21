@@ -26,6 +26,25 @@
     --border: rgba(0,85,204,0.22);
     --border2: rgba(0,85,204,0.10);
     --red: #cc2222;
+    --nav-bg: rgba(245,247,251,0.95);
+  }
+
+  [data-theme="dark"] {
+    --bg: #050d1a;
+    --bg2: #0a1628;
+    --bg3: #0e1e35;
+    --surface: #0a1628;
+    --surface2: #0e1e35;
+    --teal: #00b4d8;
+    --teal-dim: #0090b0;
+    --teal-glow: rgba(0,180,216,0.12);
+    --teal-glow2: rgba(0,180,216,0.06);
+    --text: #dce8f8;
+    --text2: #8ab0d8;
+    --text3: #3a5878;
+    --border: rgba(0,180,216,0.25);
+    --border2: rgba(0,180,216,0.12);
+    --nav-bg: rgba(5,13,26,0.95);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,7 +69,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--border2);
-    background: rgba(245,247,251,0.95);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 0 var(--border2);
   }
@@ -82,6 +101,22 @@
   }
 
   .nav-links a:hover { color: var(--teal); }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    color: var(--text3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .theme-toggle:hover { color: var(--teal); border-color: var(--teal); }
 
   /* ── HERO ── */
   .hero {
@@ -1037,6 +1072,16 @@
     line-height: 1.6;
   }
 
+  .team-mission {
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.75;
+    max-width: 620px;
+    margin-bottom: 2rem;
+    border-left: 2px solid var(--teal);
+    padding-left: 1rem;
+  }
+
   /* ── FOOTER ── */
   footer {
     position: relative;
@@ -1105,6 +1150,7 @@
     footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   }
 </style>
+  <script>(function(){var t=localStorage.getItem('arcada-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})()</script>
 </head>
 <body>
 
@@ -1123,6 +1169,15 @@
     <li><a href="https://github.com/mhemmett/arcada" target="_blank" rel="noopener">GitHub</a></li>
     <li><a href="chat/index.html" style="color:var(--teal);font-weight:500;">Data Request →</a></li>
   </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+    <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" hidden>
+      <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.22 3.22l1.42 1.42M11.36 11.36l1.42 1.42M3.22 12.78l1.42-1.42M11.36 4.64l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M13.5 10.5A6 6 0 0 1 5.5 2.5a6 6 0 1 0 8 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -1469,16 +1524,18 @@
     <div class="section-label">Researchers</div>
     <h2 class="section-title">The <span class="teal">team</span></h2>
 
+    <p class="team-mission">As users of seafloor geophysical instrument data, we know studying ocean systems is deeply interdisciplinary. We want to decrease the barrier to entry and advance researchers' ability to work across datastreams.</p>
+
     <div class="team-grid">
       <div class="team-card">
         <div class="team-name">Michael Hemmett</div>
         <div class="team-role">UW ESS Graduate Student</div>
-        <div class="team-bio">Focused on agentic framework design, OOI API integration, and instrument data pipeline architecture for the Regional Cabled Array.</div>
+        <div class="team-bio">Uses ocean bottom seismometer data from the Regional Cabled Array to study Axial Seamount volcano. Works with Marine Denolle in UW Earth and Space Sciences and William Wilcock in the UW School of Oceanography.</div>
       </div>
       <div class="team-card">
         <div class="team-name">Anjani Mirchandani</div>
         <div class="team-role">UW AMATH Undergraduate Student</div>
-        <div class="team-bio">Focused on RAG system design, Gemini API integration, and cross-disciplinary data fusion strategies for marine observational networks.</div>
+        <div class="team-bio">Uses seafloor distributed acoustic sensing (DAS) in Alaska to image the subsurface. Works with Marine Denolle in UW Earth and Space Sciences. Intends to pursue graduate work in Applied Mathematics or a related field.</div>
       </div>
     </div>
 
@@ -1632,6 +1689,33 @@
   document.getElementById('queryInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') sendQuery();
   });
+
+  function initTheme() {
+    const saved = localStorage.getItem('arcada-theme');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    updateThemeIcon();
+    document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+  }
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('arcada-theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('arcada-theme', 'dark');
+    }
+    updateThemeIcon();
+  }
+  function updateThemeIcon() {
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    btn.querySelector('.icon-sun').hidden = !isDark;
+    btn.querySelector('.icon-moon').hidden = isDark;
+  }
+  initTheme();
 
   // Intersection observer for scroll animations
   const observer = new IntersectionObserver((entries) => {
