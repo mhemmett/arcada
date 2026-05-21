@@ -78,12 +78,13 @@
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: 1.1rem;
-    letter-spacing: 0.15em;
-    color: var(--teal);
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
   }
 
-  .nav-logo span { color: var(--text2); font-weight: 400; }
+  .nav-logo .logo-arc  { color: var(--teal); }
+  .nav-logo .logo-version { color: var(--text3); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.05em; margin-left: 0.4rem; }
 
   .nav-links {
     display: flex;
@@ -1159,7 +1160,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo"><span style="color:var(--teal)">a</span>RCADA <span>/ v0.1-beta</span></div>
+  <div class="nav-logo"><span class="logo-arc">a</span>RCADA<span class="logo-version">/ v0.1-beta</span></div>
   <ul class="nav-links">
     <li><a href="#problem">Problem</a></li>
     <li><a href="#approach">Approach</a></li>
