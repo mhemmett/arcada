@@ -123,6 +123,21 @@ def main():
     ):
         tags_by_item.setdefault(row["itemID"], []).append(row["name"])
 
+    # First author's last name (orderIndex = 0, creatorType = 'author')
+    creators_by_item = {}
+    for row in con.execute(
+        f"""SELECT ic.itemID, c.lastName, c.firstName, ic.orderIndex, ct.creatorType
+            FROM itemCreators ic
+            JOIN creators c ON ic.creatorID = c.creatorID
+            JOIN creatorTypes ct ON ic.creatorTypeID = ct.creatorTypeID
+            WHERE ic.itemID IN ({ph})
+              AND ct.creatorType = 'author'
+            ORDER BY ic.itemID, ic.orderIndex""",
+        item_ids,
+    ):
+        if row["itemID"] not in creators_by_item:
+            creators_by_item[row["itemID"]] = row["lastName"] or row["firstName"] or ""
+
     con.close()
 
     papers = []
@@ -141,6 +156,7 @@ def main():
             "doi": f.get("DOI", "").strip() or None,
             "year": year,
             "journal": f.get("publicationTitle", "").strip() or None,
+            "first_author": creators_by_item.get(item_id) or None,
             "tags": tags,
             "linked_instruments": link_instruments(title, abstract, tags),
         })

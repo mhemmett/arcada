@@ -144,12 +144,15 @@ function makeChunks() {
         : "";
       const text = `${paper.title}${yearStr}${journalStr}\n\n${paper.abstract}${linkStr}`;
       chunks.push({
-        id:       `paper::${paper.doi || paper.title.slice(0, 40).replace(/\s+/g, "-")}`,
-        title:    paper.title,
-        type:     "paper",
-        source:   "zotero",
-        location: null,
-        keywords: paper.tags || [],
+        id:           `paper::${paper.doi || paper.title.slice(0, 40).replace(/\s+/g, "-")}`,
+        title:        paper.title,
+        type:         "paper",
+        source:       "zotero",
+        location:     null,
+        keywords:     paper.tags || [],
+        year:         paper.year || null,
+        journal:      paper.journal || null,
+        first_author: paper.first_author || null,
         text,
         embedText: `Research paper: ${paper.title}\n\n${paper.abstract}`,
         linked_instruments: paper.linked_instruments || [],
