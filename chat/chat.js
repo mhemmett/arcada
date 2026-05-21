@@ -701,7 +701,7 @@ async function handleNewQuery(query) {
     return;
   }
 
-  // All other intents: run retrieval and stream from the worker
+  // All other intents: run retrieval
   setStatus("Searching catalog…");
   const [bm25, semantic] = await Promise.all([
     bm25Search(query, 12),
@@ -712,7 +712,43 @@ async function handleNewQuery(query) {
     : hybridFuse(bm25, semantic);
   renderInstruments(context);
 
-  // Stream conversational response
+  // DATA_REQUEST: get AI acknowledgment (cheap /ack call) then build plan
+  if (intent === "DATA_REQUEST") {
+    const seen = new Set();
+    const instrMatches = context
+      .filter(c => !c.id.startsWith("paper::"))
+      .filter(c => { const base = c.id.replace(/::.*$/, ""); return !seen.has(base) && seen.add(base); })
+      .slice(0, 6);
+
+    if (!instrMatches.length) {
+      addMessage("assistant", "No matching instruments found for this request. Try rephrasing or check the example queries.");
+      setStatus("");
+      return;
+    }
+
+    // Fire /ack immediately; render placeholder while it loads
+    const affirmEl = addMessage("assistant", "");
+    affirmEl.innerHTML = '<span class="thinking-indicator">Thinking<span class="thinking-dots"></span></span>';
+
+    setStatus("Building data plan…");
+
+    // Get AI acknowledgment — fast flash-lite call
+    const ack = await workerPost("/ack", {
+      query,
+      instruments: instrMatches.map(c => ({ name: c.name || c.title, location: c.location, type: c.type })),
+    }).then(r => r.ack || "").catch(() => "");
+    affirmEl.innerHTML = renderMarkdown(ack || instrMatches.map(c => `- ${c.name || c.title}`).join("\n"));
+
+    const affirmText = ack || `Found instruments: ${instrMatches.map(c => c.name || c.title).join(", ")}.`;
+    HISTORY.push({ role: "user",  parts: [{ text: query      }] });
+    HISTORY.push({ role: "model", parts: [{ text: affirmText }] });
+    if (HISTORY.length > 16) HISTORY = HISTORY.slice(-16);
+
+    await proceedDataPull(query, context);
+    return;
+  }
+
+  // All other intents: stream conversational response
   setStatus("Generating response…");
   const contentEl = addMessage("assistant", "");
   const historySnapshot = [...HISTORY];
@@ -725,9 +761,9 @@ async function handleNewQuery(query) {
   if (HISTORY.length > 16) HISTORY = HISTORY.slice(-16);
 
   // Non-data intents → answered, done
-  if (intent === "QUESTION" || intent === "LITERATURE" || intent === "CAPABILITY") return;
+  if (intent === "QUESTION" || intent === "LITERATURE") return;
 
-  // AI asked a clarifying question → wait for user response
+  // AMBIGUOUS: AI asked a clarifying question → wait for user response
   if (responseHasQuestion(fullText)) {
     CONV_STATE      = "awaiting_clarification";
     PENDING_QUERY   = query;
@@ -735,7 +771,7 @@ async function handleNewQuery(query) {
     return;
   }
 
-  // Data request with no clarification needed → pull data
+  // AMBIGUOUS with no clarifying question → pull data
   await proceedDataPull(query, context);
 }
 
@@ -774,7 +810,7 @@ async function proceedDataPull(query, context) {
     return true;
   });
 
-  const { plan } = await workerPost("/plan", { query, context: planContext, catalog: INSTRUMENT_CATALOG });
+  const { plan } = await workerPost("/plan", { query, context: planContext });
 
   if (!plan?.instruments?.length) {
     setStatus("");
