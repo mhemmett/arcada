@@ -387,17 +387,31 @@ Matched instruments: ${instrList || "none found"}.
 
 In 1–2 sentences, confirm what you understood they're asking for — mention the instrument type, site, and time period if specified. Be natural and conversational. Do not make promises about data availability or say what you "will" do.`;
 
-  const resp = await fetch(`${GEMINI_JSON_URL}?key=${env.GEMINI_API_KEY}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.5, maxOutputTokens: 100 },
-    }),
-  });
+  let ackResp;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    ackResp = await fetch(`${GEMINI_JSON_URL}?key=${env.GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ role: "user", parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.5, maxOutputTokens: 100 },
+      }),
+    });
+    if (ackResp.status !== 429 && ackResp.status !== 503) break;
+    await new Promise(r => setTimeout(r, [1000, 2000][attempt] ?? 2000));
+  }
 
-  const data = await resp.json().catch(() => ({}));
-  const ack  = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+  const data = ackResp.ok ? await ackResp.json().catch(() => ({})) : {};
+  let ack = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+
+  // Template fallback if Gemini returned nothing
+  if (!ack) {
+    const names = (instruments || []).slice(0, 3).map(i => i.name).filter(Boolean);
+    ack = names.length
+      ? `Got it — looking for ${names.join(" and ")} data${instrList.includes(" at ") ? ` from the matched sites` : ""}.`
+      : `Got it — searching for relevant data based on your request.`;
+  }
+
   return Response.json({ ack }, { headers: cors(env) });
 }
 
