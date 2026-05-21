@@ -25,26 +25,22 @@ let HISTORY = [];
 let CURRENT_MODE = "ask"; // "ask" | "literature" | "data"
 
 // ── Rate limiter ──────────────────────────────────────────────────────────────
-// gemini-2.0-flash:      15 RPM free tier → 4s min between calls
-// gemini-2.0-flash-lite: 30 RPM free tier → 2s min between calls
-// Timestamps persisted to sessionStorage so page reloads don't reset the window.
-const RL = {
-  flash:     { ms: 4200, key: "rl_flash_last" },
-  flashLite: { ms: 2200, key: "rl_flash_lite_last" },
-};
+// All Gemini calls use gemini-2.0-flash-lite: 30 RPM free tier → 2.5s min between calls.
+// Timestamp persisted in sessionStorage so page reloads respect the remaining window.
+const RL_MS  = 2500;
+const RL_KEY = "rl_gemini_last";
 
-function rlGet(r)      { return parseInt(sessionStorage.getItem(r.key) || "0", 10); }
-function rlSet(r)      { sessionStorage.setItem(r.key, String(Date.now())); }
+function rlGet() { return parseInt(sessionStorage.getItem(RL_KEY) || "0", 10); }
+function rlSet() { sessionStorage.setItem(RL_KEY, String(Date.now())); }
 
-async function throttle(model) {
-  const r    = RL[model];
-  const wait = r.ms - (Date.now() - rlGet(r));
+async function throttle() {
+  const wait = RL_MS - (Date.now() - rlGet());
   if (wait > 0) {
     setStatus(`Rate limiting — waiting ${(wait / 1000).toFixed(1)}s…`);
     await new Promise(res => setTimeout(res, wait));
     setStatus("");
   }
-  rlSet(r);
+  rlSet();
 }
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
@@ -240,7 +236,7 @@ async function workerGet(path) {
 }
 
 async function streamChat(query, context, history = []) {
-  await throttle("flash");
+  await throttle();
   const headers = { "Content-Type": "application/json" };
   if (PASSWORD) headers["Authorization"] = `Bearer ${PASSWORD}`;
   return fetch(WORKER_URL + "/chat", {
@@ -982,7 +978,7 @@ async function handleNewQuery(query) {
     setStatus("Building data plan…");
 
     // Get AI acknowledgment — fast flash-lite call
-    await throttle("flashLite");
+    await throttle();
     const ack = await workerPost("/ack", {
       query,
       instruments: instrMatches.map(c => ({ name: c.name || c.title, location: c.location, type: c.type })),
@@ -1059,7 +1055,7 @@ async function proceedDataPull(query, context) {
     return true;
   });
 
-  await throttle("flashLite");
+  await throttle();
   const { plan, debug } = await workerPost("/plan", { query, context: planContext });
 
   if (!plan?.instruments?.length) {
