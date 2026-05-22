@@ -132,12 +132,9 @@ async function boot() {
 
 async function probeWorker() {
   try {
-    const headers = { "Content-Type": "application/json" };
+    const headers = {};
     if (PASSWORD) headers["Authorization"] = `Bearer ${PASSWORD}`;
-    const r = await fetch(WORKER_URL + "/embed", {
-      method: "POST", headers,
-      body: JSON.stringify({ text: "probe" }),
-    });
+    const r = await fetch(WORKER_URL + "/health", { headers });
     return r.status !== 401;
   } catch { return true; }
 }

@@ -471,6 +471,7 @@ export default {
       }
     }
 
+    if (url.pathname === "/health"   && req.method === "GET")  return new Response("ok", { status: 200, headers: cors(env) });
     if (url.pathname === "/embed"    && req.method === "POST") return handleEmbed(req, env);
     if (url.pathname === "/welcome"  && req.method === "POST") return handleWelcome(req, env);
     if (url.pathname === "/chat"     && req.method === "POST") return handleChat(req, env);
