@@ -223,7 +223,10 @@ async function workerPost(path, body) {
   const r = await fetch(WORKER_URL + path, {
     method: "POST", headers, body: JSON.stringify(body),
   });
-  if (!r.ok) throw new Error(`Worker ${path} returned ${r.status}`);
+  if (!r.ok) {
+    if (r.status === 429) sessionStorage.setItem(RL_KEY, String(Date.now() + 15000));
+    throw new Error(`Worker ${path} returned ${r.status}`);
+  }
   return r.json();
 }
 
@@ -686,7 +689,7 @@ function renderInstruments(chunks) {
   instrList.innerHTML = "";
   paperList.innerHTML = "";
 
-  const instruments = chunks.filter(c => c.type !== "paper" && c.type !== "site-context");
+  const instruments = chunks.filter(c => c.type !== "paper" && c.type !== "site-context" && c.type !== "script");
   const papers      = chunks.filter(c => c.type === "paper");
 
   if (hint) hint.style.display = instruments.length ? "none" : "";
@@ -848,6 +851,7 @@ function responseHasQuestion(text) {
 async function streamChatToElement(query, context, contentEl, history = []) {
   const resp = await streamChat(query, context, history);
   if (!resp.ok) {
+    if (resp.status === 429) sessionStorage.setItem(RL_KEY, String(Date.now() + 15000));
     const body = await resp.json().catch(() => ({}));
     throw new Error(body.error || `Chat stream failed: ${resp.status}`);
   }
@@ -961,7 +965,7 @@ async function handleNewQuery(query) {
   if (intent === "DATA_REQUEST") {
     const seen = new Set();
     const instrMatches = context
-      .filter(c => !c.id.startsWith("paper::"))
+      .filter(c => c.type !== "paper" && c.type !== "site-context" && c.type !== "script")
       .filter(c => { const base = c.id.replace(/::.*$/, ""); return !seen.has(base) && seen.add(base); })
       .slice(0, 6);
 
