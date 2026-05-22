@@ -16,7 +16,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Characterizing wind-dependent low-frequency ambient sound with ocean observatories initiative hydrophones",
@@ -29,7 +30,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/JEYMQAG3/Ragland and Abadi - 2025 - Characterizing wind-dependent low-frequency ambient sound with ocean observatories initiative hydrop.pdf"
     },
     {
       "title": "DASFormer: self-supervised pretraining for earthquake monitoring",
@@ -52,7 +54,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/L5MU2K2E/Ding et al. - 2025 - DASFormer self-supervised pretraining for earthquake monitoring.pdf"
     },
     {
       "title": "Observations of fin whales and vessels offshore oregon using fibre optic distributed acoustic sensing",
@@ -77,7 +80,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Submarine Volcanic Eruptions and Their Impacts on Hydrothermal Systems and Biological Communities",
@@ -94,7 +98,8 @@
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Enhancing fin whale vocalizations in distributed acoustic sensing data",
@@ -107,7 +112,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Estimating sound pressure levels from distributed acoustic sensing data using 20 Hz fin whale calls",
@@ -122,7 +128,8 @@
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "The MBARI Low-Altitude Survey System for 1-cm-Scale Seafloor Surveys in the Deep Ocean",
@@ -161,7 +168,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Monitoring Dynamic Magma Movement in the Lower Crust During the 2015 Eruption of Axial Seamount",
@@ -182,7 +190,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Leveraging Distributed Acoustic Sensing for monitoring vessels using submarine fiber-optic cables",
@@ -199,7 +208,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "The FUTURE of the US Marine Seafloor and Subseafloor Sampling Capabilities",
@@ -215,7 +225,8 @@
         "high latitude science",
         "seafloor sampling"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Denoising Offshore Distributed Acoustic Sensing Using Masked Auto-Encoders to Enhance Earthquake Detection",
@@ -240,7 +251,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Interoperable and scalable echosounder data processing with Echopype",
@@ -252,7 +264,8 @@
       "tags": [],
       "linked_instruments": [
         "PI-OVRSRA101"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Big data in Earth science: Emerging practice and promise",
@@ -262,7 +275,8 @@
       "journal": "Science",
       "first_author": "Vance",
       "tags": [],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/XN9DUK6G/Vance et al. - 2024 - Big data in Earth science Emerging practice and promise.pdf"
     },
     {
       "title": "Permeability and seismicity rate changes at an inflating submarine volcano caused by dynamic stresses",
@@ -290,7 +304,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Development and Operation of a Global-Scale Seismographic Network: The IRIS/USGS GSN",
@@ -308,7 +323,8 @@
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Incorporating Intensity Distance Attenuation Into PLUM Ground-Motion-Based Earthquake Early Warning in the United States: The APPLES Configuration",
@@ -334,7 +350,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Identification of Rare Multiple Core-Mantle Boundary Reflections PmKP Up To P7KP With Deep Learning",
@@ -350,7 +367,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Ocean Bottom Distributed Acoustic Sensing for Oceanic Seismicity Detection and Seismic Ocean Thermometry",
@@ -377,7 +395,8 @@
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Listening for Diverse Signals From Emergent and Submarine Volcanoes",
@@ -402,7 +421,8 @@
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "DAS-N2N: machine learning distributed acoustic sensing (DAS) signal denoising without clean data",
@@ -420,7 +440,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/F3LAISPB/Lapins et al. - 2024 - DAS-N2N machine learning distributed acoustic sensing (DAS) signal denoising without clean data.pdf"
     },
     {
       "title": "PMEL Passive Acoustics Research: Quantifying the Ocean Soundscape from Whales to Wave Energy",
@@ -435,7 +456,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Technology Review of Cabled Ocean Observatories",
@@ -451,7 +473,8 @@
         "submarine cable",
         "submarine communication"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Digital twins: a stepping stone to achieve ocean sustainability?",
@@ -466,7 +489,8 @@
         "Ocean sciences",
         "Sustainability"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Using ocean ambient sound to sense arrival time fluctuations due to temperature",
@@ -481,7 +505,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Investigation of the acoustic properties of underwater rainfall noise measured by a bottom-mounted hydrophone and its application to deep learning to classify and estimate rainfall",
@@ -494,7 +519,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Integration of untargeted metabolomics and microbial community analyses to characterize distinct deep-sea methane seeps",
@@ -507,7 +533,8 @@
       "linked_instruments": [
         "PI-MASSP-ASHES",
         "RS01SUM2-MJ01B-12-HYDMGA000"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Technology, Data and New Models for Sustainably Managing Ocean Resources",
@@ -517,7 +544,8 @@
       "journal": null,
       "first_author": "Lubchenco",
       "tags": [],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Variations and gradients between methane seep and off-seep microbial communities in a submarine canyon system in the Northeast Pacific",
@@ -530,7 +558,8 @@
       "linked_instruments": [
         "PI-MASSP-ASHES",
         "RS01SUM2-MJ01B-12-HYDMGA000"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Fluid sources and overpressures within the central Cascadia Subduction Zone revealed by a warm, high-flux seafloor seep",
@@ -547,7 +576,8 @@
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Distributed acoustic sensing recordings of low-frequency whale calls and ship noise offshore Central Oregon",
@@ -560,7 +590,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Drift Corrected Seafloor Pressure Observations of Vertical Deformation at Axial Seamount 2018–2021",
@@ -585,7 +616,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Distributed acoustic sensing for detecting near surface hydroacoustic signals",
@@ -598,7 +630,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Basin scale coherence of Kauai-Beacon m-sequence transmissions received at Wake Island and Monterey, CA",
@@ -611,7 +644,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/AKNIB7YG/Gemba et al. - 2023 - Basin scale coherence of Kauai-Beacon m-sequence transmissions received at Wake Island and Monterey,.pdf"
     },
     {
       "title": "Acoustic indices respond to specific marine mammal vocalizations and sources of anthropogenic noise",
@@ -624,7 +658,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Calibrated Absolute Seafloor Pressure Measurements for Geodesy in Cascadia",
@@ -649,7 +684,8 @@
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/IKMRBSWP/Cook et al. - 2023 - Calibrated Absolute Seafloor Pressure Measurements for Geodesy in Cascadia.pdf"
     },
     {
       "title": "Long-term noise interferometry analysis in the northeast Pacific Ocean",
@@ -662,7 +698,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Autonomous methane seep site monitoring offshore western Svalbard: hourly to seasonal variability and associated oceanographic parameters",
@@ -679,7 +716,8 @@
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/TG4L2HR8/Dølven et al. - 2022 - Autonomous methane seep site monitoring offshore western Svalbard hourly to seasonal variability an.pdf"
     },
     {
       "title": "Geodetic Monitoring at Axial Seamount Since Its 2015 Eruption Reveals a Waning Magma Supply and Tightly Linked Rates of Deformation and Seismicity",
@@ -717,7 +755,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Time series of hydrothermal vent fluid chemistry at Main Endeavour Field, Juan de Fuca Ridge: Remote sampling using the NEPTUNE cabled observatory",
@@ -742,7 +781,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03ASHS-MJ03B-15-OBSSPA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "SANTORY: SANTORini’s Seafloor Volcanic ObservatorY",
@@ -764,7 +804,8 @@
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "On using nonlinear wave interactions in multi-directional seas for energy conversion on the ocean floor",
@@ -783,7 +824,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Sonar Observation of Heat Flux of Diffuse Hydrothermal Flows",
@@ -809,7 +851,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "SMART Subsea Cables for Observing the Earth and Ocean, Mitigating Environmental Hazards, and Supporting the Blue Economy",
@@ -829,7 +872,8 @@
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Research on an Extensible Monitoring System of a Seafloor Observatory Network in Laizhou Bay",
@@ -846,7 +890,8 @@
         "remote monitoring",
         "seafloor observatory network"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Is the tidal triggering of earthquakes at Axial Seamount predictive of eruptions?",
@@ -866,7 +911,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Volcano Monitoring With Magnetic Measurements: A Simulation of Eruptions at Axial Seamount, Kilauea, Bárðarbunga, and Mount Saint Helens",
@@ -893,7 +939,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Smart Oceans: Artificial intelligence and marine protected area governance",
@@ -912,7 +959,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Ocean observation system design of mooring buoy and benthic node with electro-optical-mechanical cable",
@@ -929,7 +977,8 @@
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "An overview of ambient sound using Ocean Observatories Initiative hydrophones",
@@ -947,7 +996,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/Y5NLP7BH/Ragland et al. - 2022 - An overview of ambient sound using Ocean Observatories Initiative hydrophones.pdf"
     },
     {
       "title": "Management and Sustainable Exploitation of Marine Environments through Smart Monitoring and Automation",
@@ -966,7 +1016,8 @@
         "real time",
         "transmission"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Observation System Optimization of Offshore Acoustic Exploration for Estimating Submarine Geological Structures via Directivity Analysis",
@@ -979,7 +1030,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "The Magnetization of an Underwater Caldera: A Time-Lapse Magnetic Anomaly Study of Axial Seamount",
@@ -1003,7 +1055,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "The Potential of Using Fiber Optic Distributed Acoustic Sensing (DAS) in Earthquake Early Warning Applications",
@@ -1021,7 +1074,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Hydrate Ridge—A Gas Hydrate System in a Subduction Zone Setting",
@@ -1037,7 +1091,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Integrating Multidisciplinary Observations in Vent Environments (IMOVE): Decadal Progress in Deep-Sea Observatories at Hydrothermal Vents",
@@ -1057,7 +1112,8 @@
         "RS01SUM2-MJ01B-09-THSPHD000",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03ASHS-MJ03B-15-OBSSPA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "InSEA Project: Initiatives in Supporting the Consolidation and Enhancement of the EMSO Infrastructure and Related Activities",
@@ -1083,7 +1139,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Initial results from a hydroacoustic network to monitor submarine lava flows near Mayotte Island",
@@ -1103,7 +1160,8 @@
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "The Deep Ocean Observing Strategy: Addressing Global Challenges in the Deep Sea Through Collaboration",
@@ -1119,7 +1177,8 @@
         "multi-disciplinary",
         "science policy and planning"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Combining hydro-acoustic sources and bathymetric differences to track the vent evolution of the Mayotte eruption, Mozambique Channel",
@@ -1139,7 +1198,8 @@
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Exploring surface source contributions to ocean ambient noise interferometry with airgun shots",
@@ -1157,7 +1217,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Detection of Magma Beneath the Northern and Southern Rift Zones of Axial Seamount at the Juan de Fuca Ridge",
@@ -1177,7 +1238,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Desulfovulcanus ferrireducens gen. nov., sp. nov., a thermophilic autotrophic iron and sulfate-reducing bacterium from subseafloor basalt that grows on akaganéite and lepidocrocite minerals",
@@ -1205,7 +1267,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Diversity of magmatism, hydrothermal processes and microbial interactions at mid-ocean ridges",
@@ -1225,7 +1288,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03ASHS-MJ03B-15-OBSSPA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Automated Tethered Profiler for Hydrophysical and Bio-Optical Measurements in the Black Sea Carbon Observational Site",
@@ -1242,7 +1306,8 @@
         "tethered profiler",
         "winch"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Trends in low-frequency underwater noise off the Oregon coast and impacts of COVID-19 pandemic",
@@ -1257,7 +1322,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Acoustic and In-Situ Observations of Deep Seafloor Hydrothermal Discharge: An OOI Cabled Array ASHES Vent Field Case Study",
@@ -1287,7 +1353,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/ZMWX6ICR/Xu et al. - 2021 - Acoustic and In-Situ Observations of Deep Seafloor Hydrothermal Discharge An OOI Cabled Array ASHES.pdf"
     },
     {
       "title": "Tidal triggering of micro-seismicity associated with caldera dynamics in the Juan de Fuca ridge",
@@ -1303,7 +1370,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Variability of Natural Methane Bubble Release at Southern Hydrate Ridge",
@@ -1320,7 +1388,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Tracking Microbial Evolution in the Subseafloor Biosphere",
@@ -1330,7 +1399,8 @@
       "journal": "mSystems",
       "first_author": "Anderson",
       "tags": [],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Seafloor Geodetic Pressure Measurements to Detect Shallow Slow Slip Events: Methods to Remove Contributions from Ocean Water",
@@ -1343,7 +1413,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "The Seismo-acoustics of Submarine Volcanic Eruptions",
@@ -1363,7 +1434,8 @@
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Statistical analysis and modeling of underwater wind noise at the northeast pacific continental margin",
@@ -1373,7 +1445,8 @@
       "journal": "The Journal of the Acoustical Society of America",
       "first_author": "Schwock",
       "tags": [],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Observations of Shallow Methane Bubble Emissions From Cascadia Margin",
@@ -1396,7 +1469,8 @@
         "PI-MASSP-ASHES",
         "PI-OVRSRA101",
         "RS01SUM2-MJ01B-12-HYDMGA000"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Role of Deep-Sea Equipment in Promoting the Forefront of Studies on Life in extreme environments",
@@ -1406,7 +1480,8 @@
       "journal": "iScience",
       "first_author": "Liang",
       "tags": [],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "The PLUM Earthquake Early Warning Algorithm: A Retrospective Case Study of West Coast, USA, Data",
@@ -1422,7 +1497,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Characterizing underwater noise during rain at the northeast Pacific continental margin",
@@ -1432,7 +1508,8 @@
       "journal": "The Journal of the Acoustical Society of America",
       "first_author": "Schwock",
       "tags": [],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/GKX5D8DY/Schwock and Abadi - 2021 - Characterizing underwater noise during rain at the northeast Pacific continental margin.pdf"
     },
     {
       "title": "Bottom boundary layer oxygen fluxes during winter on the Oregon Shelf",
@@ -1449,7 +1526,8 @@
         "turbulence",
         "waves"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Don’t catch me if you can – Using cabled observatories as multidisciplinary platforms for marine fish community monitoring: an in situ case study combining Underwater Video and environmental DNA data",
@@ -1466,7 +1544,8 @@
         "Non-invasive monitoring",
         "Underwater Video"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Earthquake location and detection modeling for a future seafloor observatory along Mayotte&⋕x27;s volcanic ridge",
@@ -1482,7 +1561,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Triggering of eruptions at Axial Seamount, Juan de Fuca Ridge",
@@ -1503,7 +1583,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "A Novel Fault Location Approach for Scientific Cabled Seafloor Observatories",
@@ -1521,7 +1602,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-09-THSPHD000",
         "RS03ASHS-MJ03B-10-THSPHD000"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Precision Seismic Monitoring and Analysis at Axial Seamount Using a Real-Time Double-Difference System",
@@ -1541,7 +1623,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Ocean Observation Technologies: A Review",
@@ -1562,7 +1645,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Quantification of eruption dynamics on the north rift at Axial Seamount, Juan de Fuca Ridge",
@@ -1581,7 +1665,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "New insights into the structural elements of the upper mantle beneath the contiguous United States from S-to-P converted seismic waves",
@@ -1597,7 +1682,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Physical Sources of High-Frequency Seismic Noise on Cascadia Initiative Ocean Bottom Seismometers",
@@ -1613,7 +1699,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Revised Magmatic Source Models for the 2015 Eruption at Axial Seamount Including Estimates of Fault-Induced Deformation",
@@ -1634,7 +1721,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Toward a Universal Frequency of Occurrence Distribution for Tsunamis: Statistical Analysis of a 32-Year Bottom Pressure Record at Axial Seamount",
@@ -1653,7 +1741,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Learning features from georeferenced seafloor imagery with location guided autoencoders",
@@ -1683,7 +1772,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Crustal Strength Variations Inferred from Earthquake Stress Drop at Axial Seamount Surrounding the 2015 Eruption",
@@ -1703,7 +1793,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/KTMDEHNP/Moyer et al. - 2020 - Crustal Strength Variations Inferred from Earthquake Stress Drop at Axial Seamount Surrounding the 2.pdf"
     },
     {
       "title": "Compact representation of temporal processes in echosounder time series via matrix decompositiona)",
@@ -1716,7 +1807,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/5U7STJZ9/Lee and Staneva - 2020 - Compact representation of temporal processes in echosounder time series via matrix decompositiona).pdf"
     },
     {
       "title": "Continuous evolution of oceanic crustal structure following an eruption at Axial Seamount, Juan de Fuca Ridge",
@@ -1737,7 +1829,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/8D4WH9PA/Doran and Crawford - 2020 - Continuous evolution of oceanic crustal structure following an eruption at Axial Seamount, Juan de F.pdf"
     },
     {
       "title": "Tsunami Wavefield Reconstruction and Forecasting Using the Ensemble Kalman Filter",
@@ -1755,7 +1848,8 @@
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Stress Drops on the Blanco Oceanic Transform Fault from Interstation Phase CoherenceStress Drops on the Blanco Oceanic Transform Fault from Interstation Phase Coherence",
@@ -1773,7 +1867,8 @@
         "RS01SUM2-MJ01B-09-THSPHD000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-10-THSPHD000"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Volcanic Tremor of Mt. Etna (Italy) Recorded by NEMO-SN1 Seafloor Observatory: A New Perspective on Volcanic Eruptions Monitoring",
@@ -1796,7 +1891,8 @@
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Towards a computing continuum: Enabling edge-to-cloud integration for data-driven workflows",
@@ -1812,7 +1908,8 @@
         "programming systems",
         "streaming data-analytics"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "A Sensor Web Prototype for Cabled Seafloor Observatories in the East China Sea",
@@ -1828,7 +1925,8 @@
         "seafloor observatories",
         "sensor web"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "The Ocean Observatories Initiative",
@@ -1855,7 +1953,8 @@
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Ocean Observatories as a Tool to Advance Gas Hydrate Research",
@@ -1876,7 +1975,8 @@
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "SMART Cables for Observing the Global Ocean: Science and Implementation",
@@ -1904,7 +2004,8 @@
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Optimizing Sensor Configurations for the Detection of Slow-Slip Earthquakes in Seafloor Pressure Records, Using the Cascadia Subduction Zone as a Case Study",
@@ -1922,7 +2023,8 @@
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Posteruption Enhancement of Hydrothermal Activity: A 33-Year, Multieruption Time Series at Axial Seamount (Juan de Fuca Ridge)",
@@ -1942,7 +2044,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "The mechanism of tidal triggering of earthquakes at mid-ocean ridges",
@@ -1958,7 +2061,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Location of Seismic “Hum” Sources Following Storms in the North Pacific Ocean",
@@ -1974,7 +2078,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Interpretation of detections of volcanic activity at Ioto Island obtained from in situ seismometers and remote hydrophones of the International Monitoring System",
@@ -1994,7 +2099,8 @@
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Large-Signal Stability Analysis of the Undersea Direct Current Power System for Scientific Cabled Seafloor Observatories",
@@ -2009,7 +2115,8 @@
         "large-signal stability",
         "mixed potential function"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "A Joint Inversion for Three-dimensional P and S Wave Velocity Structure and Earthquake Locations Beneath Axial Seamount",
@@ -2039,7 +2146,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Axial Seamount: Periodic tidal loading reveals stress dependence of the earthquake size distribution (b value)",
@@ -2059,7 +2167,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Development of physical modelling tools in support of risk scenarios: A new framework focused on deep-sea mining",
@@ -2076,7 +2185,8 @@
         "Numerical modelling",
         "Precautionary principles"
       ],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": null
     },
     {
       "title": "Atlantic Meridional Overturning Circulation: Observed Transport and Variability",
@@ -2086,7 +2196,8 @@
       "journal": "Frontiers in Marine Science",
       "first_author": "Frajka-Williams",
       "tags": [],
-      "linked_instruments": []
+      "linked_instruments": [],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/D82ATUC2/Frajka-Williams et al. - 2019 - Atlantic Meridional Overturning Circulation Observed Transport and Variability.pdf"
     },
     {
       "title": "Better Regional Ocean Observing Through Cross-National Cooperation: A Case Study From the Northeast Pacific",
@@ -2109,7 +2220,8 @@
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM1-LJ01B-10-PCO2WA101",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/RNYFXHXN/Barth et al. - 2019 - Better Regional Ocean Observing Through Cross-National Cooperation A Case Study From the Northeast.pdf"
     },
     {
       "title": "The Role of the Ocean Observatories Initiative in Monitoring the Offshore Earthquake Activity of the Cascadia Subduction Zone",
@@ -2128,7 +2240,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "A Tale of Two Eruptions HOW DATA FROM AXIAL SEAMOUNT LED TO A DISCOVERY ON THE EAST PACIFIC RISE",
@@ -2146,7 +2259,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Structure, Seismicity, and Accretionary Processes at the Hot Spot-Influenced Axial Seamount on the Juan de Fuca Ridge",
@@ -2173,7 +2287,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Measuring Seafloor Strain With an Optical Fiber Interferometer",
@@ -2191,7 +2306,8 @@
         "RS01SUM2-MJ01B-09-THSPHD000",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03ASHS-MJ03B-10-THSPHD000"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Observation and Modeling of Hydrothermal Response to the 2015 Eruption at Axial Seamount, Northeast Pacific",
@@ -2212,7 +2328,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "THE RECENT VOLCANIC HISTORY OF AXIAL SEAMOUNT Geophysical Insights into Past Eruption Dynamics with an Eye Toward Enhanced Observations of Future Eruptions",
@@ -2232,7 +2349,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Distributed natural gas venting offshore along the Cascadia margin",
@@ -2249,7 +2367,8 @@
         "PI-MASSP-ASHES",
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Power from Benthic Microbial Fuel Cells Drives Autonomous Sensors and Acoustic Modems",
@@ -2264,7 +2383,8 @@
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Probabilistic Cable Damage Risk Assessment Method for Seafloor Cabled Observatory and Its Application to Hydrothermal Fields",
@@ -2287,7 +2407,8 @@
         "RS03ASHS-MJ03B-10-THSPHD000",
         "RS03ASHS-MJ03B-15-OBSSPA301",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Newly detected earthquakes in the Cascadia subduction zone linked to seamount subduction and deformed upper plate",
@@ -2303,7 +2424,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Mechanics of fault reactivation before, during, and after the 2015 eruption of Axial Seamount",
@@ -2324,7 +2446,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Passive acoustic records of seafloor methane bubble streams on the Oregon continental margin",
@@ -2344,7 +2467,8 @@
         "PI-MASSP-ASHES",
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Deep-Sea Volcanic Eruptions Create Unique Chemical and Biological Linkages Between the Subsurface Lithosphere and the Oceanic Hydrosphere",
@@ -2369,7 +2493,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Augmenting Onshore GNSS Displacements With Offshore Observations to Improve Slip Characterization for Cascadia Subduction Zone Earthquakes",
@@ -2389,7 +2514,8 @@
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/TDINBK8Z/Saunders and Haase - 2018 - Augmenting Onshore GNSS Displacements With Offshore Observations to Improve Slip Characterization fo.pdf"
     },
     {
       "title": "Automated Large-Scale Full Seismic Waveform Inversion for North America and the North Atlantic",
@@ -2405,7 +2531,8 @@
         "EARTHSCOPE-OO-AXID1",
         "EARTHSCOPE-OO-HYS14",
         "RS01SUM2-MJ01B-15-OBSBBA102"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Vulcan rule beneath the sea",
@@ -2421,7 +2548,8 @@
         "EARTHSCOPE-OO-AXID1",
         "PI-MASSP-ASHES",
         "RS01SUM1-LJ01B-10-PCO2WA101"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Circulation, hydrography, and transport over the summit of Axial Seamount, a deep volcano in the Northeast Pacific",
@@ -2442,7 +2570,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/2RHIIGGH/Xu and Lavelle - 2017 - Circulation, hydrography, and transport over the summit of Axial Seamount, a deep volcano in the Nor.pdf"
     },
     {
       "title": "High-Resolution AUV Mapping and Targeted ROV Observations of Three Historic Lava Flows at Axial Seamount",
@@ -2460,7 +2589,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Explosive processes during the 2015 eruption of Axial Seamount, as recorded by seafloor hydrophones",
@@ -2483,7 +2613,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Seismic constraints on caldera dynamics from the 2015 Axial Seamount eruption",
@@ -2504,7 +2635,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "New insights into magma plumbing along rift systems from detailed observations of eruptive behavior at Axial volcano",
@@ -2525,7 +2657,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Drift-corrected seafloor pressure observations of vertical deformation at Axial Seamount 2013–2014",
@@ -2544,7 +2677,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Time-series measurements of bubble plume variability and water column methane distribution above Southern Hydrate Ridge, Oregon",
@@ -2562,7 +2696,8 @@
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Inflation-predictable behavior and co-eruption deformation at Axial Seamount",
@@ -2583,7 +2718,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Diffuse venting at the ASHES hydrothermal field: Heat flux and tidally modulated flow variability derived from in situ time-series measurements",
@@ -2605,7 +2741,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Voluminous eruption from a zoned magma body after an increase in supply rate at Axial Seamount",
@@ -2625,7 +2762,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "An Inductive Charging and Real-Time Communications System for Profiling Moorings",
@@ -2642,7 +2780,8 @@
       "linked_instruments": [
         "RS01SUM2-MJ01B-12-HYDMGA000",
         "RS03AXBS-LJ03A-12-HYDLFA301"
-      ]
+      ],
+      "pdf_path": "/Users/mhemmett/Zotero/storage/UR4XKASW/Alford et al. - 2015 - An Inductive Charging and Real-Time Communications System for Profiling Moorings.pdf"
     },
     {
       "title": "THE CASCADIA INITIATIVE A Sea Change In Seismological Studies of Subduction Zones",
@@ -2660,7 +2799,8 @@
         "RS01SUM2-MJ01B-14-BOTPTA301",
         "RS01SUM2-MJ01B-15-OBSBBA102",
         "RS03AXBS-LJ03A-14-BOTPTA301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Establishing a new era of submarine volcanic observatories: Cabling Axial Seamount and the Endeavour Segment of the Juan de Fuca Ridge",
@@ -2688,7 +2828,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     },
     {
       "title": "Sulfur oxidizers dominate carbon fixation at a biogeochemical hot spot in the dark ocean",
@@ -2709,7 +2850,8 @@
         "RS03AXBS-LJ03A-12-HYDLFA301",
         "RS03AXBS-LJ03A-14-BOTPTA301",
         "RS03AXPS-PC03A-4B-CTDPFK301"
-      ]
+      ],
+      "pdf_path": null
     }
   ]
 }

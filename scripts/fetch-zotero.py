@@ -13,7 +13,8 @@ import sqlite3
 import tempfile
 from pathlib import Path
 
-ZOTERO_DB = Path.home() / "Zotero" / "zotero.sqlite"
+ZOTERO_DB      = Path.home() / "Zotero" / "zotero.sqlite"
+ZOTERO_STORAGE = Path.home() / "Zotero" / "storage"
 OUT = Path(__file__).parent.parent / "catalog" / "papers.json"
 
 TARGET_COLLECTIONS = {"OOI RCA", "OOI-RCA"}
@@ -113,6 +114,25 @@ def main():
     ):
         fields_by_item.setdefault(row["itemID"], {})[row["fieldName"]] = row["value"]
 
+    # PDF attachments: linkMode 0 = stored file, contentType = application/pdf
+    pdf_by_item = {}
+    for row in con.execute(
+        f"""SELECT ia.parentItemID, ia.path, i.key
+            FROM itemAttachments ia
+            JOIN items i ON ia.itemID = i.itemID
+            WHERE ia.parentItemID IN ({ph})
+              AND ia.contentType = 'application/pdf'
+              AND ia.linkMode = 1""",
+        item_ids,
+    ):
+        if row["parentItemID"] in pdf_by_item:
+            continue  # keep first attachment only
+        filename = row["path"].replace("storage:", "") if row["path"] else ""
+        if filename:
+            full_path = ZOTERO_STORAGE / row["key"] / filename
+            if full_path.exists():
+                pdf_by_item[row["parentItemID"]] = str(full_path)
+
     tags_by_item = {}
     for row in con.execute(
         f"""SELECT it.itemID, t.name
@@ -159,13 +179,15 @@ def main():
             "first_author": creators_by_item.get(item_id) or None,
             "tags": tags,
             "linked_instruments": link_instruments(title, abstract, tags),
+            "pdf_path": pdf_by_item.get(item_id),
         })
 
     papers.sort(key=lambda p: p["year"] or 0, reverse=True)
     out = {"version": "1.0", "source": "Zotero OOI-RCA collection", "papers": papers}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False))
-    print(f"Wrote {len(papers)} papers → {OUT}")
+    pdf_count = sum(1 for p in papers if p.get("pdf_path"))
+    print(f"Wrote {len(papers)} papers ({pdf_count} with attached PDF) → {OUT}")
 
 
 if __name__ == "__main__":

@@ -175,21 +175,41 @@ def process_pdf(pdf_path: Path, lookup: dict) -> list[dict]:
 def main():
     PDF_DIR.mkdir(parents=True, exist_ok=True)
     lookup = load_papers_lookup()
-    pdfs   = sorted(PDF_DIR.glob("*.pdf"))
+
+    # Collect PDFs: manually dropped files + Zotero-linked paths from papers.json
+    seen = set()
+    pdfs = []
+
+    for p in sorted(PDF_DIR.glob("*.pdf")):
+        if p not in seen:
+            seen.add(p)
+            pdfs.append(p)
+
+    if PAPERS.exists():
+        data = json.loads(PAPERS.read_text())
+        for paper in data.get("papers", []):
+            pdf_path_str = paper.get("pdf_path")
+            if not pdf_path_str:
+                continue
+            p = Path(pdf_path_str)
+            if p.exists() and p not in seen:
+                seen.add(p)
+                pdfs.append(p)
 
     if not pdfs:
-        print(f"No PDFs found in {PDF_DIR}")
-        print("Drop PDF files into catalog/pdfs/ and re-run.")
+        print("No PDFs found in catalog/pdfs/ and no pdf_path entries in papers.json.")
+        print("Run fetch-zotero.py first, or drop PDFs into catalog/pdfs/.")
         OUT.write_text(json.dumps({"chunks": []}, indent=2))
         return
 
-    print(f"Processing {len(pdfs)} PDF(s) from {PDF_DIR}\n")
+    print(f"Processing {len(pdfs)} PDF(s)\n")
     all_chunks = []
     for pdf_path in pdfs:
         all_chunks.extend(process_pdf(pdf_path, lookup))
 
     OUT.write_text(json.dumps({"chunks": all_chunks}, indent=2, ensure_ascii=False))
-    print(f"\n{len(all_chunks)} chunks from {len(pdfs)} PDFs → {OUT.relative_to(ROOT)}")
+    unique_papers = len(set(c["title"] for c in all_chunks))
+    print(f"\n{len(all_chunks)} chunks from {unique_papers} papers → {OUT.relative_to(ROOT)}")
     print("Run next: node scripts/build-index.mjs")
 
 
