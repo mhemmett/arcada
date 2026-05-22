@@ -2,7 +2,7 @@
 // Routes: POST /embed, POST /chat, POST /plan, POST /dispatch, GET /status/:runId
 
 const GEMINI_EMBED_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent";
-const GEMINI_CHAT_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse";
+const GEMINI_CHAT_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:streamGenerateContent?alt=sse";
 const GEMINI_JSON_URL  = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent";
 const GITHUB_API       = "https://api.github.com";
 
@@ -149,16 +149,18 @@ async function handleChat(req, env) {
     generationConfig: { temperature: 0.3 },
   };
 
+  // No retry on 429 — client-side throttle owns rate pacing; retrying here
+  // just multiplies quota consumption and deepens the rate-limit hole.
+  // Only retry transient 503s (model overload), not quota errors.
   let upstream;
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 3; attempt++) {
     upstream = await fetch(`${GEMINI_CHAT_URL}&key=${env.GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(geminiReq),
     });
-    if (upstream.status !== 429 && upstream.status !== 503) break;
-    const wait = [1000, 2000, 4000][attempt] ?? 4000;
-    await new Promise(r => setTimeout(r, wait));
+    if (upstream.status !== 503) break;
+    await new Promise(r => setTimeout(r, [1000, 2000][attempt] ?? 2000));
   }
 
   if (!upstream.ok) {
@@ -216,7 +218,7 @@ Return ONLY valid JSON:
 }`;
 
   let planResp;
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 3; attempt++) {
     planResp = await fetch(`${GEMINI_JSON_URL}?key=${env.GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -225,9 +227,8 @@ Return ONLY valid JSON:
         generationConfig: { temperature: 0.1, responseMimeType: "application/json" },
       }),
     });
-    if (planResp.status !== 429 && planResp.status !== 503) break;
-    const wait = [1000, 2000, 4000][attempt] ?? 4000;
-    await new Promise(r => setTimeout(r, wait));
+    if (planResp.status !== 503) break;
+    await new Promise(r => setTimeout(r, [1000, 2000][attempt] ?? 2000));
   }
 
   if (!planResp.ok) {
@@ -400,7 +401,7 @@ In 1–2 sentences, confirm what you understood they're asking for — mention t
         generationConfig: { temperature: 0.5, maxOutputTokens: 100 },
       }),
     });
-    if (ackResp.status !== 429 && ackResp.status !== 503) break;
+    if (ackResp.status !== 503) break;
     await new Promise(r => setTimeout(r, [1000, 2000][attempt] ?? 2000));
   }
 
